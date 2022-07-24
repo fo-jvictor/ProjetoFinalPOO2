@@ -16,17 +16,12 @@ import java.awt.event.ActionEvent;
 public class JanelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	admissaoPaciente admissaopaciente = new admissaoPaciente();
-	Alta alta = new Alta();
-	listaInternados listainternados = new listaInternados();
-	Medicamentos medicamentos = new Medicamentos();
-	Prescricao prescricao = new Prescricao();
-	private JPanel panelAdmissao;
-	private JPanel panelAlta;
-	private JPanel panelListaInternados;
-	private JPanel panelMedicamentos;
-	private JPanel panelPrescricao;
-	private JPanel panelLogin;
+	private CardLayout card;
+	private admissaoPaciente panelAdmissaoPaciente;
+	private Alta alta;
+	private listaInternados listainternados;
+	private Medicamentos medicamentos;
+	private Prescricao prescricao;
 	
 	/**
 	 * Launch the application.
@@ -52,31 +47,24 @@ public class JanelaPrincipal extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout(0, 0));
+		card = new CardLayout();
+		contentPane.setLayout(card);
 		
-		panelAlta = new JPanel();
-		contentPane.add(panelAlta, "name_699767005706600");
-		panelAlta.setLayout(new CardLayout(0, 0));
-		panelAlta.add(alta);
+		JPanel panel = new JPanel();
+		contentPane.add(panel, "name_167132349494000");
 		
-		panelAdmissao = new JPanel();
-		contentPane.add(panelAdmissao, "name_699884370093200");
-		panelAdmissao.add(admissaopaciente);
+		panelAdmissaoPaciente = new admissaoPaciente();	
+		alta = new Alta();
+		listainternados = new listaInternados();
+		medicamentos = new Medicamentos();
+		prescricao = new Prescricao();
 		
-		panelListaInternados = new JPanel();
-		contentPane.add(panelListaInternados, "name_6896934562800");
-		panelListaInternados.add(listainternados);
+		contentPane.add(panelAdmissaoPaciente,"panelAdmissaoPaciente");
+		contentPane.add(alta,"alta");
+		contentPane.add(listainternados,"listainternados");
+		contentPane.add(medicamentos,"medicamentos");
+		contentPane.add(prescricao,"prescricao");
 		
-		panelMedicamentos = new JPanel();
-		contentPane.add(panelMedicamentos, "name_6903237011500");
-		panelMedicamentos.add(medicamentos);
-		
-		panelPrescricao = new JPanel();
-		contentPane.add(panelPrescricao, "name_6911705205000");
-		panelPrescricao.add(prescricao);
-		
-		panelLogin = new JPanel();
-		contentPane.add(panelLogin, "name_6914162876600");		
 		
 		setTitle("Sistema de Prescricao Medica");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,15 +78,9 @@ public class JanelaPrincipal extends JFrame {
 		
 		JMenuItem menuItemAdmissao = new JMenuItem("Admissao");
 		menuItemAdmissao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {				
 				
-				panelAlta.setVisible(false);
-				panelListaInternados.setVisible(false);
-				panelMedicamentos.setVisible(false);
-				panelPrescricao.setVisible(false);
-				panelLogin.setVisible(false);				
-				panelAdmissao.setVisible(true);
-				
+				card.show(contentPane,"panelAdmissaoPaciente");
 			}
 		});
 		mnNewMenu.add(menuItemAdmissao);
@@ -107,12 +89,8 @@ public class JanelaPrincipal extends JFrame {
 		menuItemListaInternados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				panelAlta.setVisible(false);
-				panelMedicamentos.setVisible(false);
-				panelPrescricao.setVisible(false);
-				panelLogin.setVisible(false);				
-				panelAdmissao.setVisible(false);				
-				panelListaInternados.setVisible(true);								
+				card.show(contentPane,"listainternados");
+											
 			}
 		});
 		mnNewMenu.add(menuItemListaInternados);
@@ -121,12 +99,8 @@ public class JanelaPrincipal extends JFrame {
 		menuItemAlta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				panelMedicamentos.setVisible(false);
-				panelPrescricao.setVisible(false);
-				panelLogin.setVisible(false);				
-				panelAdmissao.setVisible(false);				
-				panelListaInternados.setVisible(false);
-				panelAlta.setVisible(true);				
+				card.show(contentPane,"alta");
+					
 			}
 		});
 		mnNewMenu.add(menuItemAlta);
@@ -136,14 +110,10 @@ public class JanelaPrincipal extends JFrame {
 		
 		JMenuItem menuItemMedicamentos = new JMenuItem("Medicamentos");
 		menuItemMedicamentos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {	
 				
-				panelPrescricao.setVisible(false);
-				panelLogin.setVisible(false);				
-				panelAdmissao.setVisible(false);				
-				panelListaInternados.setVisible(false);
-				panelAlta.setVisible(false);
-				panelMedicamentos.setVisible(true);				
+				card.show(contentPane,"medicamentos");
+						
 			}
 		});
 		mnNewMenu_1.add(menuItemMedicamentos);
@@ -151,13 +121,9 @@ public class JanelaPrincipal extends JFrame {
 		JMenuItem menuItemPrescrever = new JMenuItem("Prescrever");
 		menuItemPrescrever.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+					
+				card.show(contentPane,"prescricao");
 				
-				panelLogin.setVisible(false);				
-				panelAdmissao.setVisible(false);				
-				panelListaInternados.setVisible(false);
-				panelAlta.setVisible(false);
-				panelMedicamentos.setVisible(false);
-				panelPrescricao.setVisible(true);				
 			}
 		});
 		mnNewMenu_1.add(menuItemPrescrever);
@@ -172,22 +138,7 @@ public class JanelaPrincipal extends JFrame {
 		mnNewMenu_2.add(menuItemSairSistema);
 		
 	}
-
-	public JPanel getPanelAdmissao() {
-		return panelAdmissao;
-	}
-
-	public void setPanelAdmissao(JPanel panelAdmissao) {
-		this.panelAdmissao = panelAdmissao;
-	}
-
-	public admissaoPaciente getAdmissaopaciente() {
-		return admissaopaciente;
-	}
-
-	public void setAdmissaopaciente(admissaoPaciente admissaopaciente) {
-		this.admissaopaciente = admissaopaciente;
-	}
+	
 	
 	
 

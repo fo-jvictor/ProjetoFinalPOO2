@@ -8,7 +8,7 @@ public class Main {
 		
 		JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
 		janelaPrincipal.setVisible(true);
-				
+		
 	}
 	
 }
