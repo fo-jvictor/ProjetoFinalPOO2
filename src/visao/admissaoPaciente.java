@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 
@@ -20,6 +21,9 @@ public class admissaoPaciente extends JPanel {
 	private JCheckBox checkboxGluten;
 	private JCheckBox checkboxDipirona;	
 	private JComboBox comboBox;
+	private ButtonGroup buttonGroup = new ButtonGroup();
+	private JButton btnCancelar;
+	private JButton btnSalvar;
 
 	/**
 	 * Create the panel.
@@ -59,6 +63,11 @@ public class admissaoPaciente extends JPanel {
 		checkboxPenicilina = new JCheckBox("Penicilina");
 		add(checkboxPenicilina, "cell 3 4");
 		
+		buttonGroup.add(checkboxGluten);
+		buttonGroup.add(checkboxDipirona);
+		buttonGroup.add(checkboxFrutosdoMar);
+		buttonGroup.add(checkboxPenicilina);
+		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblNome, "cell 0 6,alignx trailing");
@@ -86,11 +95,11 @@ public class admissaoPaciente extends JPanel {
 		comboBox.addItem("Emergencia");
 		comboBox.addItem("UTI");
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(btnSalvar, "cell 0 15");
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(btnCancelar, "cell 1 15");
 	}
@@ -157,6 +166,30 @@ public class admissaoPaciente extends JPanel {
 
 	public void setComboBox(JComboBox comboBox) {
 		this.comboBox = comboBox;
+	}
+
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+
+	public void setBtnCancelar(JButton btnCancelar) {
+		this.btnCancelar = btnCancelar;
+	}
+
+	public JButton getBtnSalvar() {
+		return btnSalvar;
+	}
+
+	public void setBtnSalvar(JButton btnSalvar) {
+		this.btnSalvar = btnSalvar;
+	}
+
+	public ButtonGroup getButtonGroup() {
+		return buttonGroup;
+	}
+
+	public void setButtonGroup(ButtonGroup buttonGroup) {
+		this.buttonGroup = buttonGroup;
 	}
 	
 	

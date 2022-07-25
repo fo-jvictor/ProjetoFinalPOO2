@@ -138,6 +138,54 @@ public class JanelaPrincipal extends JFrame {
 		mnNewMenu_2.add(menuItemSairSistema);
 		
 	}
+
+	public CardLayout getCard() {
+		return card;
+	}
+
+	public void setCard(CardLayout card) {
+		this.card = card;
+	}
+
+	public admissaoPaciente getPanelAdmissaoPaciente() {
+		return panelAdmissaoPaciente;
+	}
+
+	public void setPanelAdmissaoPaciente(admissaoPaciente panelAdmissaoPaciente) {
+		this.panelAdmissaoPaciente = panelAdmissaoPaciente;
+	}
+
+	public Alta getAlta() {
+		return alta;
+	}
+
+	public void setAlta(Alta alta) {
+		this.alta = alta;
+	}
+
+	public listaInternados getListainternados() {
+		return listainternados;
+	}
+
+	public void setListainternados(listaInternados listainternados) {
+		this.listainternados = listainternados;
+	}
+
+	public Medicamentos getMedicamentos() {
+		return medicamentos;
+	}
+
+	public void setMedicamentos(Medicamentos medicamentos) {
+		this.medicamentos = medicamentos;
+	}
+
+	public Prescricao getPrescricao() {
+		return prescricao;
+	}
+
+	public void setPrescricao(Prescricao prescricao) {
+		this.prescricao = prescricao;
+	}
 	
 	
 	

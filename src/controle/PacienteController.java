@@ -1,5 +1,9 @@
 package controle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import dao.PacienteDAO;
@@ -10,6 +14,7 @@ public class PacienteController implements ActionListener {
 
 	private PacienteDAO pacienteDAO;
 	private JanelaPrincipal janelaPrincipal;
+	
 	//manda os dados dessa classe para PacienteDAO
 	
 	public PacienteController(JanelaPrincipal janelaPrincipal)
@@ -20,32 +25,48 @@ public class PacienteController implements ActionListener {
 		//as operações de persistencia no banco de dados;		
 		this.janelaPrincipal=janelaPrincipal;
 		//ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
-		pacienteDAO = new PacienteDAO();		
+		pacienteDAO = new PacienteDAO();
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getBtnSalvar().addActionListener( this);
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getBtnCancelar().addActionListener(this);
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().addActionListener(this);
+		//falta o Button Group;
+		
 	}
 	
 	public void cadastraPaciente()
 	{
-		int cpf;
-		String nome;
-		Date dataNascimento; //USAR O PARSE DE DATAS QUE TEM NO MEU GITHUB
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			
+		int cpf = Integer.parseInt(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText());
+		String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
+		Date dataNascimento = sdf.parse(janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
 		int alergia;
-		int unidade;
+		int unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedIndex();
 		Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
-		pacienteDAO.cadastraPaciente(paciente);	
+		pacienteDAO.cadastraPaciente(paciente);		
+		}catch(ParseException e)
+			{
+				e.printStackTrace();
+			}
 	}
 	
 	//REMOVE PACIENTE ? 
 	public void altaPaciente()
 	{
-		int cpf;
-		Paciente paciente = new Paciente(cpf,null,null,null,null);
+		int cpf = Integer.parseInt(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText());
+		Paciente paciente = new Paciente(cpf,null,null,0,0);
 		//chama metodo de consulta para efetuar a exclusão do paciente do banco
 		//consulta é implementada na classe DAO		
 		pacienteDAO.altaPaciente(paciente);
+	}	
+	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	
-	
 	
 	
 }
