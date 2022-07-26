@@ -12,7 +12,10 @@ import javax.swing.JButton;
 
 public class Alta extends JPanel {
 	private JTextField textField;
-
+	private JComboBox comboBox;
+	private JButton buttonSalvar;
+	private JButton buttonCancelar;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -29,15 +32,49 @@ public class Alta extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("Motivo");
 		add(lblNewLabel_1, "flowx,cell 1 6,alignx right");
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		add(comboBox, "cell 2 6 2 1,growx");
 		
-		JButton btnNewButton = new JButton("Salvar");
-		add(btnNewButton, "cell 0 15,growx");
+		buttonSalvar = new JButton("Salvar");
+		add(buttonSalvar, "cell 0 15,growx");
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		add(btnNewButton_1, "cell 1 15,growx");
+		buttonCancelar = new JButton("Cancelar");
+		add(buttonCancelar, "cell 1 15,growx");
 
 	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
+
+	public JComboBox getComboBox() {
+		return comboBox;
+	}
+
+	public void setComboBox(JComboBox comboBox) {
+		this.comboBox = comboBox;
+	}
+
+	public JButton getButtonSalvar() {
+		return buttonSalvar;
+	}
+
+	public void setButtonSalvar(JButton buttonSalvar) {
+		this.buttonSalvar = buttonSalvar;
+	}
+
+	public JButton getButtonCancelar() {
+		return buttonCancelar;
+	}
+
+	public void setButtonCancelar(JButton buttonCancelar) {
+		this.buttonCancelar = buttonCancelar;
+	}
+	
+	
 
 }

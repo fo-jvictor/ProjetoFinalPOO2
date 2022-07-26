@@ -21,7 +21,7 @@ public class admissaoPaciente extends JPanel {
 	private JCheckBox checkboxGluten;
 	private JCheckBox checkboxDipirona;	
 	private JComboBox comboBox;
-	private ButtonGroup buttonGroup = new ButtonGroup();
+	private ButtonGroup buttonGroup = new ButtonGroup();	
 	private JButton btnCancelar;
 	private JButton btnSalvar;
 

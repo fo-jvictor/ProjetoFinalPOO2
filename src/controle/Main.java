@@ -9,6 +9,11 @@ public class Main {
 		JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
 		janelaPrincipal.setVisible(true);
 		
+		PacienteController pacienteController = new PacienteController(janelaPrincipal);
+		MedicamentoController medicamentoController = new MedicamentoController(janelaPrincipal);
+		AltaController altaController = new AltaController(janelaPrincipal);
+		
+		
 	}
 	
 }

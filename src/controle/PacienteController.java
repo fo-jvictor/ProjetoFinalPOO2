@@ -29,6 +29,10 @@ public class PacienteController implements ActionListener {
 		this.janelaPrincipal.getPanelAdmissaoPaciente().getBtnSalvar().addActionListener( this);
 		this.janelaPrincipal.getPanelAdmissaoPaciente().getBtnCancelar().addActionListener(this);
 		this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().addActionListener(this);
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxDipirona().setActionCommand("Dipirona");
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxFrutosdoMar().setActionCommand("Frutos do Mar");
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxGluten().setActionCommand("Gluten");
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxPenicilina().setActionCommand("Penicilina");
 		//falta o Button Group;
 		
 	}
@@ -40,10 +44,12 @@ public class PacienteController implements ActionListener {
 			
 		int cpf = Integer.parseInt(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText());
 		String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
-		Date dataNascimento = sdf.parse(janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
-		int alergia;
+		Date dataNascimento = sdf.parse(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
+		String alergia2 = this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().getSelection().getActionCommand();
+		int alergia=0;
 		int unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedIndex();
 		Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
+		System.out.println("ALERGIA DOS CHECKBOX: "+alergia2);
 		pacienteDAO.cadastraPaciente(paciente);		
 		}catch(ParseException e)
 			{
@@ -65,7 +71,10 @@ public class PacienteController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if (e.getActionCommand().equals("Salvar"))
+		{
+			cadastraPaciente();
+		}
 	}
 	
 	

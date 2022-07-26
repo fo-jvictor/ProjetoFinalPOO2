@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import model.Paciente;
 
@@ -28,10 +29,13 @@ public class PacienteDAO {
 			PreparedStatement prepS;
 
 			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				//String data = sdf.format(paciente.getDataNascimento());
 				prepS = con.prepareStatement(sql);
 				prepS.setInt(1, paciente.getCpf());
-				prepS.setString(2, paciente.getNome());
-				prepS.setDate(3, (Date) paciente.getDataNascimento());
+				prepS.setString(2, paciente.getNome());				
+				prepS.setDate(3, new java.sql.Date(paciente.getDataNascimento().getTime()));
+				prepS.setInt(4, paciente.getAlergia());
 				// alterar metodo getAlergia
 				// prepS.setInt(4, paciente.getAlergia());
 				prepS.setInt(5, paciente.getUnidade());

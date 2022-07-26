@@ -10,6 +10,8 @@ import javax.swing.JButton;
 public class Medicamentos extends JPanel {
 	private JTextField fieldCodigodebarra;
 	private JTextField fieldNome;
+	private JButton btnCancelar;
+	private JButton btnSalvar;
 
 	/**
 	 * Create the panel.
@@ -41,7 +43,7 @@ public class Medicamentos extends JPanel {
 		JCheckBox checkboxDipirona = new JCheckBox("Dipirona");
 		add(checkboxDipirona, "cell 5 10,alignx center");
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		add(btnSalvar, "flowx,cell 0 16 2 1,growx");
 		
 		fieldCodigodebarra = new JTextField();
@@ -52,9 +54,42 @@ public class Medicamentos extends JPanel {
 		add(fieldNome, "cell 1 4 5 1,growx");
 		fieldNome.setColumns(10);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		add(btnCancelar, "cell 2 16,growx");
-
 	}
+
+	public JTextField getFieldCodigodebarra() {
+		return fieldCodigodebarra;
+	}
+
+	public void setFieldCodigodebarra(JTextField fieldCodigodebarra) {
+		this.fieldCodigodebarra = fieldCodigodebarra;
+	}
+
+	public JTextField getFieldNome() {
+		return fieldNome;
+	}
+
+	public void setFieldNome(JTextField fieldNome) {
+		this.fieldNome = fieldNome;
+	}
+
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+
+	public void setBtnCancelar(JButton btnCancelar) {
+		this.btnCancelar = btnCancelar;
+	}
+
+	public JButton getBtnSalvar() {
+		return btnSalvar;
+	}
+
+	public void setBtnSalvar(JButton btnSalvar) {
+		this.btnSalvar = btnSalvar;
+	}
+	
+	
 
 }

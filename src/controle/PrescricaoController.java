@@ -21,12 +21,16 @@ public class PrescricaoController {
 	
 	public void consultaPaciente()
 	{
-		int cpf; //pega dos fields na tela;
+		int cpf = Integer.parseInt(janelaPrincipal.getPrescricao().getTfCPF().getText());
 		Paciente paciente = new Paciente(cpf, null, null, 0, 0);
-		pacienteDAO.consultaPaciente(paciente);
-		
+		pacienteDAO.consultaPaciente(paciente);		
 		//set Nome do paciente que agora voltou populado do banco de dados no FIELD nome;
 		//set DataNascimento do paciente no field Data Nasc;
+		
+		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());
+		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText(paciente.getDataNascimento());
+		//implementar entidade medicamento na entidade paciente
+		this.janelaPrincipal.getPrescricao().getTfMedicamento().setText(paciente.getMedicamento());
 		
 	}
 

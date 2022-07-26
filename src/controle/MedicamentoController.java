@@ -1,10 +1,13 @@
 package controle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import dao.MedicamentoDAO;
 import model.Medicamento;
 import visao.JanelaPrincipal;
 
-public class MedicamentoController {
+public class MedicamentoController implements ActionListener{
 
 	private MedicamentoDAO medicamentoDAO;
 	private JanelaPrincipal janelaPrincipal;
@@ -14,15 +17,27 @@ public class MedicamentoController {
 		this.janelaPrincipal=janelaPrincipal;
 		medicamentoDAO = new MedicamentoDAO();
 		//ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
+		this.janelaPrincipal.getMedicamentos().getBtnSalvar().addActionListener(this);
+		this.janelaPrincipal.getMedicamentos().getBtnCancelar().addActionListener(this);
 	}
 	
 	public void cadastraMedicamento()
 	{
-		String codigoBarra;
-		String nome;
-		int alergia;
+		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
+		String nome = this.janelaPrincipal.getMedicamentos().getFieldNome().getText();
+		int alergia=0;
 		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia);
 		medicamentoDAO.cadastraMedicamento(medicamento);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getActionCommand().equals("Salvar"))
+		{
+			cadastraMedicamento();
+		}
+		
 	}
 	
 	

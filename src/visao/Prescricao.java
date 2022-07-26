@@ -15,7 +15,10 @@ public class Prescricao extends JPanel {
 	private JTextField tfNome;
 	private JTextField tfDataNasc;
 	private JTextField tfMedicamento;
-	private JTextField tfMedicamento02;
+	private JTextField tfMedicamentoProtegido;
+	private JButton btnSalvar;
+	private JButton btnCancelar;
+	private JRadioButton rdbtnPenicilina;
 
 	/**
 	 * Create the panel.
@@ -56,7 +59,7 @@ public class Prescricao extends JPanel {
 		rdbtnFrutosDoMar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(rdbtnFrutosDoMar, "cell 2 5");
 		
-		JRadioButton rdbtnPenicilina = new JRadioButton("Penicilina");
+		rdbtnPenicilina = new JRadioButton("Penicilina");
 		rdbtnPenicilina.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(rdbtnPenicilina, "cell 3 5");
 		
@@ -89,18 +92,76 @@ public class Prescricao extends JPanel {
 		add(tfMedicamento, "cell 1 14,growx");
 		tfMedicamento.setColumns(10);
 		
-		tfMedicamento02 = new JTextField();
-		add(tfMedicamento02, "cell 2 14,growx");
-		tfMedicamento02.setColumns(10);
+		tfMedicamentoProtegido = new JTextField();
+		add(tfMedicamentoProtegido, "cell 2 14,growx");
+		tfMedicamentoProtegido.setColumns(10);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSalvar.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(btnSalvar, "flowx,cell 0 17");
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(btnCancelar, "cell 1 17");
-
 	}
+
+	public JTextField getTfCPF() {
+		return tfCPF;
+	}
+
+	public void setTfCPF(JTextField tfCPF) {
+		this.tfCPF = tfCPF;
+	}
+
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+
+	public void setTfNome(JTextField tfNome) {
+		this.tfNome = tfNome;
+	}
+
+	public JTextField getTfDataNasc() {
+		return tfDataNasc;
+	}
+
+	public void setTfDataNasc(JTextField tfDataNasc) {
+		this.tfDataNasc = tfDataNasc;
+	}
+
+	public JTextField getTfMedicamento() {
+		return tfMedicamento;
+	}
+
+	public void setTfMedicamento(JTextField tfMedicamento) {
+		this.tfMedicamento = tfMedicamento;
+	}
+
+	public JTextField getTfMedicamentoProtegido() {
+		return tfMedicamentoProtegido;
+	}
+
+	public void setTfMedicamentoProtegido(JTextField tfMedicamentoProtegido) {
+		this.tfMedicamentoProtegido = tfMedicamentoProtegido;
+	}
+
+	public JButton getBtnSalvar() {
+		return btnSalvar;
+	}
+
+	public void setBtnSalvar(JButton btnSalvar) {
+		this.btnSalvar = btnSalvar;
+	}
+
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+
+	public void setBtnCancelar(JButton btnCancelar) {
+		this.btnCancelar = btnCancelar;
+	}
+	
+	
+	
 }
