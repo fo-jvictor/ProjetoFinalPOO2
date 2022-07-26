@@ -5,6 +5,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
 public class Medicamentos extends JPanel {
@@ -12,6 +13,11 @@ public class Medicamentos extends JPanel {
 	private JTextField fieldNome;
 	private JButton btnCancelar;
 	private JButton btnSalvar;
+	private ButtonGroup buttonGroup = new ButtonGroup();
+	private JCheckBox checkboxGluten;
+	private JCheckBox checkboxFrutosdomar;
+	private JCheckBox checkboxPenicilina;
+	private JCheckBox checkboxDipirona;
 
 	/**
 	 * Create the panel.
@@ -31,17 +37,22 @@ public class Medicamentos extends JPanel {
 		JLabel lblNewLabel_4 = new JLabel("Contraindicado para as alergias:");
 		add(lblNewLabel_4, "cell 0 8 2 1");
 		
-		JCheckBox checkboxGluten = new JCheckBox("Glúten");
+		checkboxGluten = new JCheckBox("Glúten");
 		add(checkboxGluten, "flowx,cell 0 10,alignx center");
 		
-		JCheckBox checkboxFrutosdomar = new JCheckBox("Frutos do Mar");
+		checkboxFrutosdomar = new JCheckBox("Frutos do Mar");
 		add(checkboxFrutosdomar, "cell 1 10 3 1,alignx center");
 		
-		JCheckBox checkboxPenicilina = new JCheckBox("Penicilina");
+		checkboxPenicilina = new JCheckBox("Penicilina");
 		add(checkboxPenicilina, "flowx,cell 4 10,alignx left");
 		
-		JCheckBox checkboxDipirona = new JCheckBox("Dipirona");
+		checkboxDipirona = new JCheckBox("Dipirona");
 		add(checkboxDipirona, "cell 5 10,alignx center");
+		
+		buttonGroup.add(checkboxDipirona);
+		buttonGroup.add(checkboxFrutosdomar);
+		buttonGroup.add(checkboxGluten);
+		buttonGroup.add(checkboxPenicilina);
 		
 		btnSalvar = new JButton("Salvar");
 		add(btnSalvar, "flowx,cell 0 16 2 1,growx");
@@ -88,6 +99,46 @@ public class Medicamentos extends JPanel {
 
 	public void setBtnSalvar(JButton btnSalvar) {
 		this.btnSalvar = btnSalvar;
+	}
+
+	public ButtonGroup getButtonGroup() {
+		return buttonGroup;
+	}
+
+	public void setButtonGroup(ButtonGroup buttonGroup) {
+		this.buttonGroup = buttonGroup;
+	}
+
+	public JCheckBox getCheckboxGluten() {
+		return checkboxGluten;
+	}
+
+	public void setCheckboxGluten(JCheckBox checkboxGluten) {
+		this.checkboxGluten = checkboxGluten;
+	}
+
+	public JCheckBox getCheckboxFrutosdomar() {
+		return checkboxFrutosdomar;
+	}
+
+	public void setCheckboxFrutosdomar(JCheckBox checkboxFrutosdomar) {
+		this.checkboxFrutosdomar = checkboxFrutosdomar;
+	}
+
+	public JCheckBox getCheckboxPenicilina() {
+		return checkboxPenicilina;
+	}
+
+	public void setCheckboxPenicilina(JCheckBox checkboxPenicilina) {
+		this.checkboxPenicilina = checkboxPenicilina;
+	}
+
+	public JCheckBox getCheckboxDipirona() {
+		return checkboxDipirona;
+	}
+
+	public void setCheckboxDipirona(JCheckBox checkboxDipirona) {
+		this.checkboxDipirona = checkboxDipirona;
 	}
 	
 	

@@ -19,14 +19,19 @@ public class MedicamentoController implements ActionListener{
 		//ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
 		this.janelaPrincipal.getMedicamentos().getBtnSalvar().addActionListener(this);
 		this.janelaPrincipal.getMedicamentos().getBtnCancelar().addActionListener(this);
+		this.janelaPrincipal.getMedicamentos().getCheckboxDipirona().setActionCommand("Dipirona");
+		this.janelaPrincipal.getMedicamentos().getCheckboxFrutosdomar().setActionCommand("Frutos do Mar");
+		this.janelaPrincipal.getMedicamentos().getCheckboxGluten().setActionCommand("Gluten");
+		this.janelaPrincipal.getMedicamentos().getCheckboxPenicilina().setActionCommand("Penicilina");
 	}
 	
 	public void cadastraMedicamento()
 	{
 		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
 		String nome = this.janelaPrincipal.getMedicamentos().getFieldNome().getText();
-		int alergia=0;
-		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia);
+		int alergia2=0;
+		String alergia = this.janelaPrincipal.getMedicamentos().getButtonGroup().getSelection().getActionCommand();
+		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia2);
 		medicamentoDAO.cadastraMedicamento(medicamento);
 	}
 
