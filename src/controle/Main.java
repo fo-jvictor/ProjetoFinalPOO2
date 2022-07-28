@@ -12,7 +12,8 @@ public class Main {
 		PacienteController pacienteController = new PacienteController(janelaPrincipal);
 		MedicamentoController medicamentoController = new MedicamentoController(janelaPrincipal);
 		AltaController altaController = new AltaController(janelaPrincipal);
-		
+		PrescricaoController prescricaoController = new PrescricaoController(janelaPrincipal);
+		ListaInternadosController listaInternadosController = new ListaInternadosController(janelaPrincipal);
 		
 	}
 	
