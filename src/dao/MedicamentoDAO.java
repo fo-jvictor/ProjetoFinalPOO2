@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Medicamento;
@@ -21,11 +22,10 @@ public class MedicamentoDAO {
 
 		if(con!=null)
 		{
-			String sql = "insert into Medicamento (codigobara,nome,alergia) values (?,?,?)";
+			String sql = "insert into Medicamento (codigobarra,nome,alergia) values (?,?,?)";
 			PreparedStatement prepS;
 
-			try {
-				
+			try {				
 				prepS = con.prepareStatement(sql);
 				prepS.setString(1, medicamento.getCodigoBarra());
 				prepS.setString(2, medicamento.getNome());
@@ -33,15 +33,14 @@ public class MedicamentoDAO {
 				
 				int result = prepS.executeUpdate();
 				
-				if (result>0)
+				if (result==1)
 				{
 					ClasseConexaoMySQL.fecharConexao();
 					System.out.println("Medicamento cadastrado com sucesso!");
 					return true;
 				}
 				ClasseConexaoMySQL.fecharConexao();
-				return false;
-				
+				return false;		
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -49,6 +48,47 @@ public class MedicamentoDAO {
 			}
 		}		
 		return false;
+	}
+	
+	public boolean consultaMedicamento(Medicamento medicamento)
+	{
+		ClasseConexaoMySQL.abrirConexaoMySQL();
+		con = ClasseConexaoMySQL.getCon();
+		
+		String nome = null;
+		int alergia = 0;
+		
+		if(con!=null)
+		{
+			String sql = "select * from Medicamento where codigobarra like ?";
+			PreparedStatement prepS;
+			
+			try {
+				prepS = con.prepareStatement(sql);
+				prepS.setString(1, medicamento.getCodigoBarra());
+				ResultSet resultSet = prepS.executeQuery();
+				
+				while(resultSet.next())
+				{
+					nome = resultSet.getString(2);
+					alergia = resultSet.getInt(3);					
+				}
+				
+				medicamento.setNome(nome);
+				medicamento.setAlergia(alergia);
+				con.close();
+				return true;
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}			
+			
+		}
+		
+		return false;
+
 	}
 
 }

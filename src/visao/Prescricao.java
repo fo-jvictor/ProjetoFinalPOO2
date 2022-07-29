@@ -93,7 +93,7 @@ public class Prescricao extends JPanel {
 		tfMedicamento.setColumns(10);
 		
 		tfMedicamentoProtegido = new JTextField();
-		add(tfMedicamentoProtegido, "cell 2 14,growx");
+		add(tfMedicamentoProtegido, "cell 2 14 2 1,growx");
 		tfMedicamentoProtegido.setColumns(10);
 		
 		btnSalvar = new JButton("Salvar");

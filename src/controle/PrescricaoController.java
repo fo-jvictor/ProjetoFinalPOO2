@@ -44,8 +44,8 @@ public class PrescricaoController implements ActionListener{
 		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText(sdf.format(paciente.getDataNascimento()));
 		
 		String codigoBarra = this.janelaPrincipal.getPrescricao().getTfMedicamento().getText();
-		Medicamento medicamento = new Medicamento(codigoBarra,null,0);
-		
+		Medicamento medicamento = new Medicamento(codigoBarra,null,0);		
+		medicamentoDAO.consultaMedicamento(medicamento);		
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
 		//implementar verificação de nomes na entidade Medicamento
 		//implementar entidade medicamento na entidade paciente

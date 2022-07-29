@@ -28,8 +28,7 @@ public class ListaInternadosController implements ActionListener {
 	{
 		for(Paciente paciente : pacientes)
 		{
-			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosNome().setText(paciente.getNome());
-			
+			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosNome().setText(paciente.getNome());			
 		}
 	}
 

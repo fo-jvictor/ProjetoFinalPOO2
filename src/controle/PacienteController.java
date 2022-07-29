@@ -50,7 +50,8 @@ public class PacienteController implements ActionListener {
 		int unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedIndex();
 		Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
 		System.out.println("ALERGIA DOS CHECKBOX: "+alergia2);
-		pacienteDAO.cadastraPaciente(paciente);		
+		pacienteDAO.cadastraPaciente(paciente);	
+		System.out.println("PACIENTE CADASTRADO COM SUCESSO!\n");
 		}catch(ParseException e)
 			{
 				e.printStackTrace();
