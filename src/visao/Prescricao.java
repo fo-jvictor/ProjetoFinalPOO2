@@ -7,6 +7,7 @@ import javax.swing.JMenuBar;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
@@ -19,6 +20,7 @@ public class Prescricao extends JPanel {
 	private JButton btnSalvar;
 	private JButton btnCancelar;
 	private JRadioButton rdbtnPenicilina;
+	private ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Create the panel.

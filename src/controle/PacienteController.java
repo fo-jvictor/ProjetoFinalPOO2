@@ -1,5 +1,6 @@
 package controle;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -14,6 +15,8 @@ public class PacienteController implements ActionListener {
 
 	private PacienteDAO pacienteDAO;
 	private JanelaPrincipal janelaPrincipal;
+	//private CardLayout card;
+
 	
 	//manda os dados dessa classe para PacienteDAO
 	
@@ -66,7 +69,18 @@ public class PacienteController implements ActionListener {
 		//chama metodo de consulta para efetuar a exclusão do paciente do banco
 		//consulta é implementada na classe DAO		
 		pacienteDAO.altaPaciente(paciente);
-	}	
+	}
+	
+	public void limpaTela()
+	{
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().setText("");
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().setText("");
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().setText("");
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().setSelectedIndex(0);
+		this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().clearSelection();
+		//desmarcar os checkbox
+		//trocar para o menu principal		
+	}
 	
 
 	@Override
@@ -76,6 +90,12 @@ public class PacienteController implements ActionListener {
 		{
 			cadastraPaciente();
 		}
+		
+		if(e.getActionCommand().equals("Cancelar"))
+		{
+			limpaTela();
+		}
+		
 	}
 	
 	

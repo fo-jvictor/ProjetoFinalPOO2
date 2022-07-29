@@ -49,8 +49,16 @@ public class PrescricaoController implements ActionListener{
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
 		//implementar verificação de nomes na entidade Medicamento
 		//implementar entidade medicamento na entidade paciente
-		//this.janelaPrincipal.getPrescricao().getTfMedicamento().setText(paciente.getMedicamento());
-		
+		//this.janelaPrincipal.getPrescricao().getTfMedicamento().setText(paciente.getMedicamento());		
+	}
+	
+	public void limpaTela()
+	{
+		this.janelaPrincipal.getPrescricao().getTfCPF().setText("");
+		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
+		this.janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
+		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
+		this.janelaPrincipal.getPrescricao().getTfNome().setText("");
 	}
 
 	@Override
@@ -62,7 +70,7 @@ public class PrescricaoController implements ActionListener{
 		}
 		if(e.getActionCommand().equals("Cancelar"))
 		{
-			//funcaoCancelar();
+			limpaTela();
 		}
 	}
 	

@@ -22,6 +22,7 @@ public class JanelaPrincipal extends JFrame {
 	private listaInternados listainternados;
 	private Medicamentos medicamentos;
 	private Prescricao prescricao;
+	private JPanel panel;
 	
 	/**
 	 * Launch the application.
@@ -50,7 +51,7 @@ public class JanelaPrincipal extends JFrame {
 		card = new CardLayout();
 		contentPane.setLayout(card);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		contentPane.add(panel, "name_167132349494000");
 		
 		panelAdmissaoPaciente = new admissaoPaciente();	
