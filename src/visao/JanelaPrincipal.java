@@ -24,6 +24,10 @@ public class JanelaPrincipal extends JFrame {
 	private Prescricao prescricao;
 	private JPanel panel;
 	private TelaDeLogin telaLogin;
+	private JMenuBar menuBar;
+	private JMenu menuPacientes;
+	private JMenu menuPrescricao;
+	private JMenu menuLogin;
 //	
 	/**
 	 * Launch the application.
@@ -74,11 +78,11 @@ public class JanelaPrincipal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Pacientes");
-		menuBar.add(mnNewMenu);
+		menuPacientes = new JMenu("Pacientes");
+		menuBar.add(menuPacientes);
 		
 		JMenuItem menuItemAdmissao = new JMenuItem("Admissao");
 		menuItemAdmissao.addActionListener(new ActionListener() {
@@ -87,7 +91,7 @@ public class JanelaPrincipal extends JFrame {
 				card.show(contentPane,"panelAdmissaoPaciente");
 			}
 		});
-		mnNewMenu.add(menuItemAdmissao);
+		menuPacientes.add(menuItemAdmissao);
 		
 		JMenuItem menuItemListaInternados = new JMenuItem("Lista de Internados");
 		menuItemListaInternados.addActionListener(new ActionListener() {
@@ -97,7 +101,7 @@ public class JanelaPrincipal extends JFrame {
 											
 			}
 		});
-		mnNewMenu.add(menuItemListaInternados);
+		menuPacientes.add(menuItemListaInternados);
 		
 		JMenuItem menuItemAlta = new JMenuItem("Alta");
 		menuItemAlta.addActionListener(new ActionListener() {
@@ -107,10 +111,10 @@ public class JanelaPrincipal extends JFrame {
 					
 			}
 		});
-		mnNewMenu.add(menuItemAlta);
+		menuPacientes.add(menuItemAlta);
 		
-		JMenu mnNewMenu_1 = new JMenu("Prescricao");
-		menuBar.add(mnNewMenu_1);
+		menuPrescricao = new JMenu("Prescricao");
+		menuBar.add(menuPrescricao);
 		
 		JMenuItem menuItemMedicamentos = new JMenuItem("Medicamentos");
 		menuItemMedicamentos.addActionListener(new ActionListener() {
@@ -120,7 +124,7 @@ public class JanelaPrincipal extends JFrame {
 						
 			}
 		});
-		mnNewMenu_1.add(menuItemMedicamentos);
+		menuPrescricao.add(menuItemMedicamentos);
 		
 		JMenuItem menuItemPrescrever = new JMenuItem("Prescrever");
 		menuItemPrescrever.addActionListener(new ActionListener() {
@@ -130,10 +134,10 @@ public class JanelaPrincipal extends JFrame {
 				
 			}
 		});
-		mnNewMenu_1.add(menuItemPrescrever);
+		menuPrescricao.add(menuItemPrescrever);
 		
-		JMenu mnNewMenu_2 = new JMenu("Login");
-		menuBar.add(mnNewMenu_2);
+		menuLogin = new JMenu("Login");
+		menuBar.add(menuLogin);
 		
 		JMenuItem menuItemAutenticarUsuario = new JMenuItem("Autenticar Usuario");
 		menuItemAutenticarUsuario.addActionListener(new ActionListener() {
@@ -143,10 +147,13 @@ public class JanelaPrincipal extends JFrame {
 				
 			}
 		});
-		mnNewMenu_2.add(menuItemAutenticarUsuario);
+		menuLogin.add(menuItemAutenticarUsuario);
 		
 		JMenuItem menuItemSairSistema = new JMenuItem("Sair do Sistema");
-		mnNewMenu_2.add(menuItemSairSistema);
+		menuLogin.add(menuItemSairSistema);
+		
+		menuPacientes.setEnabled(false);
+		menuPrescricao.setEnabled(false);		
 		
 	}
 
@@ -212,6 +219,30 @@ public class JanelaPrincipal extends JFrame {
 
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
+	}
+
+	public JMenu getMenuPacientes() {
+		return menuPacientes;
+	}
+
+	public void setMenuPacientes(JMenu menuPacientes) {
+		this.menuPacientes = menuPacientes;
+	}
+
+	public JMenu getMenuPrescricao() {
+		return menuPrescricao;
+	}
+
+	public void setMenuPrescricao(JMenu menuPrescricao) {
+		this.menuPrescricao = menuPrescricao;
+	}
+
+	public JMenu getMenuLogin() {
+		return menuLogin;
+	}
+
+	public void setMenuLogin(JMenu menuLogin) {
+		this.menuLogin = menuLogin;
 	}
 	
 	

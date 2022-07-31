@@ -27,10 +27,15 @@ public class UsuarioController implements ActionListener{
 		String usuario = this.janelaPrincipal.getTelaLogin().getTfUsuario().getText();
 		String senha = this.janelaPrincipal.getTelaLogin().getTfSenha().getText();
 		Usuario user = new Usuario(usuario,senha);
-		if (usuarioDAO.autenticar(user))
+		
+		if (usuarioDAO.autenticar(user))			
 		{
 			System.out.println("Usuário autenticado com sucesso");
+			this.janelaPrincipal.getMenuPacientes().setEnabled(true);
+			this.janelaPrincipal.getMenuPrescricao().setEnabled(true);
 		}
+		
+		
 	}
 
 	@Override
