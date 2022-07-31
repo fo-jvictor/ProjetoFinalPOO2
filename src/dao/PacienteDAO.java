@@ -32,7 +32,7 @@ public class PacienteDAO {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				//String data = sdf.format(paciente.getDataNascimento());
 				prepS = con.prepareStatement(sql);
-				prepS.setInt(1, paciente.getCpf());
+				prepS.setString(1, paciente.getCpf());
 				prepS.setString(2, paciente.getNome());				
 				prepS.setDate(3, new java.sql.Date(paciente.getDataNascimento().getTime()));
 				prepS.setInt(4, paciente.getAlergia());
@@ -78,7 +78,7 @@ public class PacienteDAO {
 			try {
 
 				prepS = con.prepareStatement(sql);
-				prepS.setInt(1, paciente.getCpf());
+				prepS.setString(1, paciente.getCpf());
 				int result = prepS.executeUpdate();
 
 				if (result > 0) {
@@ -113,7 +113,7 @@ public class PacienteDAO {
 
 		try {
 			prepS = con.prepareStatement(sql);
-			prepS.setInt(1, paciente.getCpf());
+			prepS.setString(1, paciente.getCpf());
 			ResultSet resultSet = prepS.executeQuery();
 
 			while (resultSet.next()) {

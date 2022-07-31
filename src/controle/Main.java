@@ -14,6 +14,7 @@ public class Main {
 		AltaController altaController = new AltaController(janelaPrincipal);
 		PrescricaoController prescricaoController = new PrescricaoController(janelaPrincipal);
 		ListaInternadosController listaInternadosController = new ListaInternadosController(janelaPrincipal);
+		UsuarioController usuarioController = new UsuarioController(janelaPrincipal);
 		
 	}
 	

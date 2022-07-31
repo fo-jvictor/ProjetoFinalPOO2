@@ -45,16 +45,25 @@ public class PacienteController implements ActionListener {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			
-		int cpf = Integer.parseInt(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText());
+		String cpf = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText();
 		String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
 		Date dataNascimento = sdf.parse(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
 		String alergia2 = this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().getSelection().getActionCommand();
 		int alergia=0;
 		int unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedIndex();
+		
 		Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
+		
+		if(pacienteDAO.cadastraPaciente(paciente))
+		{
+			System.out.println("PACIENTE CADASTRADO COM SUCESSO!\n");
+		}
+		
+		else
+		{
+			System.out.println("teste erro ao cadastrar");
+		}		
 		System.out.println("ALERGIA DOS CHECKBOX: "+alergia2);
-		pacienteDAO.cadastraPaciente(paciente);	
-		System.out.println("PACIENTE CADASTRADO COM SUCESSO!\n");
 		}catch(ParseException e)
 			{
 				e.printStackTrace();
@@ -64,23 +73,12 @@ public class PacienteController implements ActionListener {
 	//REMOVE PACIENTE ? 
 	public void altaPaciente()
 	{
-		int cpf = Integer.parseInt(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText());
+		String cpf = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText();
 		Paciente paciente = new Paciente(cpf,null,null,0,0);
 		//chama metodo de consulta para efetuar a exclusão do paciente do banco
 		//consulta é implementada na classe DAO		
 		pacienteDAO.altaPaciente(paciente);
-	}
-	
-	public void limpaTela()
-	{
-		this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().setText("");
-		this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().setText("");
-		this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().setText("");
-		this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().setSelectedIndex(0);
-		this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().clearSelection();
-		//desmarcar os checkbox
-		//trocar para o menu principal		
-	}
+	}	
 	
 
 	@Override
@@ -93,7 +91,13 @@ public class PacienteController implements ActionListener {
 		
 		if(e.getActionCommand().equals("Cancelar"))
 		{
-			limpaTela();
+			this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().setText("");
+			this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().setText("");
+			this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().setText("");
+			this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().setSelectedIndex(0);
+			this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().clearSelection();	
+			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
+
 		}
 		
 	}

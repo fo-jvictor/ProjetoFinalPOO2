@@ -23,7 +23,8 @@ public class JanelaPrincipal extends JFrame {
 	private Medicamentos medicamentos;
 	private Prescricao prescricao;
 	private JPanel panel;
-	
+	private TelaDeLogin telaLogin;
+//	
 	/**
 	 * Launch the application.
 	 */
@@ -52,19 +53,21 @@ public class JanelaPrincipal extends JFrame {
 		contentPane.setLayout(card);
 		
 		panel = new JPanel();
-		contentPane.add(panel, "name_167132349494000");
+		contentPane.add(panel, "panel");
 		
 		panelAdmissaoPaciente = new admissaoPaciente();	
 		alta = new Alta();
 		listainternados = new listaInternados();
 		medicamentos = new Medicamentos();
 		prescricao = new Prescricao();
+		telaLogin = new TelaDeLogin();
 		
 		contentPane.add(panelAdmissaoPaciente,"panelAdmissaoPaciente");
 		contentPane.add(alta,"alta");
 		contentPane.add(listainternados,"listainternados");
 		contentPane.add(medicamentos,"medicamentos");
 		contentPane.add(prescricao,"prescricao");
+		contentPane.add(telaLogin,"telaLogin");
 		
 		
 		setTitle("Sistema de Prescricao Medica");
@@ -133,6 +136,13 @@ public class JanelaPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem menuItemAutenticarUsuario = new JMenuItem("Autenticar Usuario");
+		menuItemAutenticarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				card.show(contentPane,"telaLogin");
+				
+			}
+		});
 		mnNewMenu_2.add(menuItemAutenticarUsuario);
 		
 		JMenuItem menuItemSairSistema = new JMenuItem("Sair do Sistema");
@@ -186,6 +196,22 @@ public class JanelaPrincipal extends JFrame {
 
 	public void setPrescricao(Prescricao prescricao) {
 		this.prescricao = prescricao;
+	}
+
+	public TelaDeLogin getTelaLogin() {
+		return telaLogin;
+	}
+
+	public void setTelaLogin(TelaDeLogin telaLogin) {
+		this.telaLogin = telaLogin;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
 	}
 	
 	

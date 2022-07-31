@@ -44,7 +44,11 @@ public class ListaInternadosController implements ActionListener {
 		
 		if (e.getActionCommand().equals("Cancelar"))
 		{
-			
+			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosNome().setText("");
+			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosDataNasc().setText("");
+			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosUnidade().setText("");
+			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().setText("");
+			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
 		}
 		
 	}

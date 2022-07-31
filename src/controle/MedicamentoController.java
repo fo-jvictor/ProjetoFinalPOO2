@@ -33,16 +33,8 @@ public class MedicamentoController implements ActionListener{
 		String alergia = this.janelaPrincipal.getMedicamentos().getButtonGroup().getSelection().getActionCommand();
 		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia2);
 		medicamentoDAO.cadastraMedicamento(medicamento);
-	}
+	}	
 	
-	public void limpaTela()
-	{
-		this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().setText("");
-		this.janelaPrincipal.getMedicamentos().getFieldNome().setText("");
-		this.janelaPrincipal.getMedicamentos().getButtonGroup().clearSelection();
-		//retornar ao panel principal
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -53,7 +45,10 @@ public class MedicamentoController implements ActionListener{
 		
 		if (e.getActionCommand().equals("Cancelar"))
 		{
-			limpaTela();
+			this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().setText("");
+			this.janelaPrincipal.getMedicamentos().getFieldNome().setText("");
+			this.janelaPrincipal.getMedicamentos().getButtonGroup().clearSelection();
+			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
 		}
 		
 	}

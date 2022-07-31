@@ -22,7 +22,7 @@ public class AltaController implements ActionListener {
 	
 	public void altaPaciente()
 	{
-		int cpf = Integer.parseInt(janelaPrincipal.getAlta().getTextField().getText());
+		String cpf = this.janelaPrincipal.getAlta().getTextField().getText();
 		Paciente paciente = new Paciente(cpf,null,null,0,0);
 		pacienteDAO.altaPaciente(paciente);
 	}
@@ -33,6 +33,12 @@ public class AltaController implements ActionListener {
 		if (e.getActionCommand().equals("Salvar"))
 		{
 			altaPaciente();
+		}
+		if (e.getActionCommand().equals("Cancelar"))
+		{
+			this.janelaPrincipal.getAlta().getTextField().setText("");
+			this.janelaPrincipal.getAlta().getComboBox().getItemAt(0);
+			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
 		}
 	}
 

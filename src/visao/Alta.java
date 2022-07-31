@@ -34,6 +34,10 @@ public class Alta extends JPanel {
 		
 		comboBox = new JComboBox();
 		add(comboBox, "cell 2 6 2 1,growx");
+		comboBox.addItem("Selecione o motivo de alta");
+		comboBox.addItem("Cura");
+		comboBox.addItem("Transferencia");
+		comboBox.addItem("Obito");
 		
 		buttonSalvar = new JButton("Salvar");
 		add(buttonSalvar, "cell 0 15,growx");

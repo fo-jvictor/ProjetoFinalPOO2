@@ -32,7 +32,7 @@ public class PrescricaoController implements ActionListener{
 		
 	   DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");		
 		
-		int cpf = Integer.parseInt(janelaPrincipal.getPrescricao().getTfCPF().getText());
+		String cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
 		Paciente paciente = new Paciente(cpf, null, null, 0, 0);
 		pacienteDAO.consultaPaciente(paciente);		
 		//set Nome do paciente que agora voltou populado do banco de dados no FIELD nome;
@@ -54,11 +54,9 @@ public class PrescricaoController implements ActionListener{
 	
 	public void limpaTela()
 	{
-		this.janelaPrincipal.getPrescricao().getTfCPF().setText("");
-		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
-		this.janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
-		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
-		this.janelaPrincipal.getPrescricao().getTfNome().setText("");
+		
+		//fazer o Button Group na tela prescricao e trocar os radio buttons para checkboxes;
+		//this.janelaPrincipal.getPrescricao()
 	}
 
 	@Override
@@ -70,7 +68,12 @@ public class PrescricaoController implements ActionListener{
 		}
 		if(e.getActionCommand().equals("Cancelar"))
 		{
-			limpaTela();
+			this.janelaPrincipal.getPrescricao().getTfCPF().setText("");
+			this.janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
+			this.janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
+			this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
+			this.janelaPrincipal.getPrescricao().getTfNome().setText("");
+			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");			
 		}
 	}
 	
