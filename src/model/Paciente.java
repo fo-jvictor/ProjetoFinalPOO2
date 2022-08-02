@@ -16,9 +16,15 @@ public class Paciente {
 	}
 
 	public Paciente(String cpf, String nome, Date dataNascimento, int alergia, int unidade) {
-		super();
 		
-		this.cpf=cpf;
+		if(isCPF(cpf))
+		{
+			this.cpf=cpf;
+		}
+		else
+		{
+			System.out.println("O campo cpf nao pode ser nulo!");
+		}
 		
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
