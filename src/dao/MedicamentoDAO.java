@@ -88,7 +88,77 @@ public class MedicamentoDAO {
 		}
 		
 		return false;
+	}
+	
+	public boolean atualizaMedicamento(Medicamento medicamento)
+	{
+		ClasseConexaoMySQL.abrirConexaoMySQL();
+		con = ClasseConexaoMySQL.getCon();
+		
+		if(con!=null)
+		{
+			String sql = "update Medicamento set codigobarra = ?, nome = ?, alergia = ?";
+			PreparedStatement prepS;
+			
+			try {
+				prepS = con.prepareStatement(sql);
+				prepS.setString(1, medicamento.getCodigoBarra());
+				prepS.setString(2, medicamento.getNome());
+				prepS.setInt(3, medicamento.getAlergia());
+				int result = prepS.executeUpdate();
+				
+				if(result==1)
+				{
+					ClasseConexaoMySQL.fecharConexao();
+					System.out.println("Medicamento atualizado com sucesso!");
+					return true;
+				}
+				ClasseConexaoMySQL.fecharConexao();
+				System.out.println("Falha ao cadastrar medicamento, informe os dados corretos!");
+				return false;
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
+		}
+		
+		return false;		
+	}
+	
+	public boolean removeMedicamento(Medicamento medicamento)
+	{
+		ClasseConexaoMySQL.abrirConexaoMySQL();
+		con = ClasseConexaoMySQL.getCon();
+		
+		if (con!=null)
+		{
+			String sql = "delete from Medicamento where codigobarra like ?";
+			PreparedStatement prepS;
+			
+			try {
+				prepS = con.prepareStatement(sql);
+				prepS.setString(1, medicamento.getCodigoBarra());
+				int result = prepS.executeUpdate();
+				
+				if (result==1)
+				{
+					ClasseConexaoMySQL.fecharConexao();
+					System.out.println("Medicamento removido com sucesso!");
+				}
+				
+				ClasseConexaoMySQL.fecharConexao();
+				System.out.println("Falha ao remover o medicamento!");
+				return false;
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return false;
 	}
 
 }
