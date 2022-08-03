@@ -48,7 +48,7 @@ public class PacienteController implements ActionListener {
 		String cpf = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText();
 		String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
 		Date dataNascimento = sdf.parse(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
-		String alergia2 = this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().getSelection().getActionCommand();
+		//String alergia2 = this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().getSelection().getActionCommand();
 		String alergiaa = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxDipirona().getActionCommand();
 		int alergia=0;
 		int unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedIndex();
