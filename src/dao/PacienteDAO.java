@@ -128,7 +128,6 @@ public class PacienteDAO {
 			paciente.setDataNascimento(dataNascimento);
 			paciente.setAlergia(alergia);
 			paciente.setUnidade(unidade);
-			//TESTAR PQ ISSO AQUI PODE RETORNAR VALORES NULL OU 0 CASO O while(resultSet.next()) NÃO FOR TRUE
 			con.close();
 			return true;
 

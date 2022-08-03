@@ -18,12 +18,14 @@ public class Medicamentos extends JPanel {
 	private JCheckBox checkboxFrutosdomar;
 	private JCheckBox checkboxPenicilina;
 	private JCheckBox checkboxDipirona;
+	private JButton btnRemover;
+	private JButton btnAtualizar;
 
 	/**
 	 * Create the panel.
 	 */
 	public Medicamentos() {
-		setLayout(new MigLayout("", "[96.00][][grow][grow][grow][grow]", "[][][][][][][][][][][][][][][][][]"));
+		setLayout(new MigLayout("", "[96.00][][123.00,grow][83.00,grow][grow][grow]", "[][][][][][][][][][][][][][][][][]"));
 		
 		JLabel lblNewLabel = new JLabel("Dados do Medicamento:");
 		add(lblNewLabel, "cell 0 1 2 1");
@@ -67,6 +69,12 @@ public class Medicamentos extends JPanel {
 		
 		btnCancelar = new JButton("Cancelar");
 		add(btnCancelar, "cell 2 16,growx");
+		
+		btnAtualizar = new JButton("Atualizar");
+		add(btnAtualizar, "cell 3 16,growx");
+		
+		btnRemover = new JButton("Remover");
+		add(btnRemover, "cell 4 16,growx");
 	}
 
 	public JTextField getFieldCodigodebarra() {
@@ -139,6 +147,22 @@ public class Medicamentos extends JPanel {
 
 	public void setCheckboxDipirona(JCheckBox checkboxDipirona) {
 		this.checkboxDipirona = checkboxDipirona;
+	}
+
+	public JButton getBtnRemover() {
+		return btnRemover;
+	}
+
+	public void setBtnRemover(JButton btnRemover) {
+		this.btnRemover = btnRemover;
+	}
+
+	public JButton getBtnAtualizar() {
+		return btnAtualizar;
+	}
+
+	public void setBtnAtualizar(JButton btnAtualizar) {
+		this.btnAtualizar = btnAtualizar;
 	}
 	
 	
