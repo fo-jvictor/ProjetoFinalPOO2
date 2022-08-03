@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 public class Prescricao extends JPanel {
 	private JTextField tfCPF;
@@ -19,8 +20,10 @@ public class Prescricao extends JPanel {
 	private JTextField tfMedicamentoProtegido;
 	private JButton btnSalvar;
 	private JButton btnCancelar;
-	private JRadioButton rdbtnPenicilina;
-	private ButtonGroup buttonGroup = new ButtonGroup();
+	private JCheckBox checkBoxFrutosMar;
+	private JCheckBox checkBoxPenicilina;
+	private JCheckBox checkBoxGluten;
+	private JCheckBox checkBoxDipirona;
 
 	/**
 	 * Create the panel.
@@ -40,13 +43,11 @@ public class Prescricao extends JPanel {
 		lblAlergia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblAlergia, "cell 2 2");
 		
-		JRadioButton rdbtnGluten = new JRadioButton("Gluten");
-		rdbtnGluten.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(rdbtnGluten, "cell 2 4");
+		checkBoxGluten = new JCheckBox("Gluten");
+		add(checkBoxGluten, "cell 2 4");
 		
-		JRadioButton rdbtnDipirona = new JRadioButton("Dipirona");
-		rdbtnDipirona.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(rdbtnDipirona, "cell 3 4");
+		checkBoxDipirona = new JCheckBox("Dipirona");
+		add(checkBoxDipirona, "cell 3 4");
 		
 		JLabel lblCPF = new JLabel("CPF:");
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -57,13 +58,11 @@ public class Prescricao extends JPanel {
 		add(tfCPF, "cell 1 5,growx");
 		tfCPF.setColumns(10);
 		
-		JRadioButton rdbtnFrutosDoMar = new JRadioButton("Frutos Do Mar");
-		rdbtnFrutosDoMar.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(rdbtnFrutosDoMar, "cell 2 5");
+		checkBoxFrutosMar = new JCheckBox("Frutos do Mar");
+		add(checkBoxFrutosMar, "cell 2 5");
 		
-		rdbtnPenicilina = new JRadioButton("Penicilina");
-		rdbtnPenicilina.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(rdbtnPenicilina, "cell 3 5");
+		checkBoxPenicilina = new JCheckBox("Penicilina");
+		add(checkBoxPenicilina, "cell 3 5");
 		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -162,6 +161,38 @@ public class Prescricao extends JPanel {
 
 	public void setBtnCancelar(JButton btnCancelar) {
 		this.btnCancelar = btnCancelar;
+	}
+
+	public JCheckBox getCheckBoxFrutosMar() {
+		return checkBoxFrutosMar;
+	}
+
+	public void setCheckBoxFrutosMar(JCheckBox checkBoxFrutosMar) {
+		this.checkBoxFrutosMar = checkBoxFrutosMar;
+	}
+
+	public JCheckBox getCheckBoxPenicilina() {
+		return checkBoxPenicilina;
+	}
+
+	public void setCheckBoxPenicilina(JCheckBox checkBoxPenicilina) {
+		this.checkBoxPenicilina = checkBoxPenicilina;
+	}
+
+	public JCheckBox getCheckBoxGluten() {
+		return checkBoxGluten;
+	}
+
+	public void setCheckBoxGluten(JCheckBox checkBoxGluten) {
+		this.checkBoxGluten = checkBoxGluten;
+	}
+
+	public JCheckBox getCheckBoxDipirona() {
+		return checkBoxDipirona;
+	}
+
+	public void setCheckBoxDipirona(JCheckBox checkBoxDipirona) {
+		this.checkBoxDipirona = checkBoxDipirona;
 	}
 	
 	

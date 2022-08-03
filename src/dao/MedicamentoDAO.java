@@ -149,7 +149,6 @@ public class MedicamentoDAO {
 				}
 				
 				ClasseConexaoMySQL.fecharConexao();
-				System.out.println("Falha ao remover o medicamento!");
 				return false;
 				
 			} catch (SQLException e) {

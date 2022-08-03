@@ -28,7 +28,7 @@ public class PacienteDAO {
 			String sql = "insert into Paciente (cpf,nome,dataNascimento,alergia,unidade) values (?,?,?,?,?)";
 			PreparedStatement prepS;
 
-			try {
+			try {				
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				//String data = sdf.format(paciente.getDataNascimento());
 				prepS = con.prepareStatement(sql);

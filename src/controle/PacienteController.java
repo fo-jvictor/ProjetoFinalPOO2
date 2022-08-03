@@ -43,27 +43,20 @@ public class PacienteController implements ActionListener {
 	public void cadastraPaciente()
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			
+		
+		try {			
 		String cpf = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText();
 		String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
 		Date dataNascimento = sdf.parse(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
 		String alergia2 = this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().getSelection().getActionCommand();
+		String alergiaa = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxDipirona().getActionCommand();
 		int alergia=0;
 		int unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedIndex();
 		
 		Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
-		
-		if(pacienteDAO.cadastraPaciente(paciente))
-		{
-			System.out.println("PACIENTE CADASTRADO COM SUCESSO!\n");
-		}
-		
-		else
-		{
-			System.out.println("teste erro ao cadastrar");
-		}		
-		System.out.println("ALERGIA DOS CHECKBOX: "+alergia2);
+		pacienteDAO.cadastraPaciente(paciente);		
+			
+		System.out.println("ALERGIA DOS CHECKBOX: "+alergiaa);
 		}catch(ParseException e)
 			{
 				e.printStackTrace();

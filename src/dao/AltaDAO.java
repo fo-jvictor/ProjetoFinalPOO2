@@ -21,7 +21,7 @@ public class AltaDAO {
 		
 		if(con!=null)
 		{
-			String sql = "insert into Alta values (cpfpaciente,motivoalta) values (?,?)";
+			String sql = "insert into Alta (cpfpaciente,motivoalta) values (?,?)";
 			PreparedStatement prepS;
 			
 			try {
