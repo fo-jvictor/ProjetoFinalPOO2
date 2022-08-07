@@ -7,8 +7,10 @@ import java.text.SimpleDateFormat;
 
 import dao.MedicamentoDAO;
 import dao.PacienteDAO;
+import dao.PrescricaoMedicamentoDAO;
 import model.Medicamento;
 import model.Paciente;
+import model.PrescricaoMedicamento;
 import visao.JanelaPrincipal;
 
 public class PrescricaoController implements ActionListener{
@@ -16,6 +18,7 @@ public class PrescricaoController implements ActionListener{
 	private JanelaPrincipal janelaPrincipal;
 	private PacienteDAO pacienteDAO;
 	private MedicamentoDAO medicamentoDAO;
+	private PrescricaoMedicamentoDAO prescricaoMedicamentoDAO;
 	
 	public PrescricaoController(JanelaPrincipal janelaPrincipal)
 	{
@@ -30,33 +33,38 @@ public class PrescricaoController implements ActionListener{
 	public void consultaPaciente()
 	{
 		
-	   DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");		
+	    DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");		
 		
 		String cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
-		Paciente paciente = new Paciente(cpf, null, null, 0, 0);
-		pacienteDAO.consultaPaciente(paciente);		
+		Paciente paciente = new Paciente(cpf, null, null, null, null);
+		
+		pacienteDAO.consultaPaciente(paciente);	
+		
 		//set Nome do paciente que agora voltou populado do banco de dados no FIELD nome;
-		//set DataNascimento do paciente no field Data Nasc;		
-		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());
+		//set DataNascimento do paciente no field Data Nasc;	
 		
-		//this.janelaPrincipal.getPrescricao().getTfDataNasc().setText(""+paciente.getDataNascimento());
+		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());		
 		
-		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText(sdf.format(paciente.getDataNascimento()));
+		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText(sdf.format(paciente.getDataNascimento()));		
 		
 		String codigoBarra = this.janelaPrincipal.getPrescricao().getTfMedicamento().getText();
-		Medicamento medicamento = new Medicamento(codigoBarra,null,0);		
-		medicamentoDAO.consultaMedicamento(medicamento);		
+		Medicamento medicamento = new Medicamento(codigoBarra,null,null);		
+		medicamentoDAO.consultaMedicamento(medicamento);	
+		
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
-		//implementar verificação de nomes na entidade Medicamento
-		//implementar entidade medicamento na entidade paciente
-		//this.janelaPrincipal.getPrescricao().getTfMedicamento().setText(paciente.getMedicamento());		
+		
+		PrescricaoMedicamento prescricaoM = new PrescricaoMedicamento(cpf, codigoBarra);		
+		prescricaoMedicamentoDAO.cadastraPrescricao(prescricaoM);
+		
 	}
 	
 	public void limpaTela()
-	{
-		
-		//fazer o Button Group na tela prescricao e trocar os radio buttons para checkboxes;
-		//this.janelaPrincipal.getPrescricao()
+	{		
+		this.janelaPrincipal.getPrescricao().getTfCPF().setText("");
+		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
+		this.janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
+		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
+		this.janelaPrincipal.getPrescricao().getTfNome().setText("");		
 	}
 
 	@Override
@@ -68,11 +76,7 @@ public class PrescricaoController implements ActionListener{
 		}
 		if(e.getActionCommand().equals("Cancelar"))
 		{
-			this.janelaPrincipal.getPrescricao().getTfCPF().setText("");
-			this.janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
-			this.janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
-			this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
-			this.janelaPrincipal.getPrescricao().getTfNome().setText("");
+			limpaTela();
 			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");			
 		}
 	}

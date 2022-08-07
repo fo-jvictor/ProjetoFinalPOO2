@@ -29,22 +29,13 @@ public class PacienteDAO {
 			PreparedStatement prepS;
 
 			try {				
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-				//String data = sdf.format(paciente.getDataNascimento());
 				prepS = con.prepareStatement(sql);
 				prepS.setString(1, paciente.getCpf());
 				prepS.setString(2, paciente.getNome());				
 				prepS.setDate(3, new java.sql.Date(paciente.getDataNascimento().getTime()));
-				prepS.setInt(4, paciente.getAlergia());
-				// alterar metodo getAlergia
-				// prepS.setInt(4, paciente.getAlergia());
-				prepS.setInt(5, paciente.getUnidade());
-
-				// coloquei unidade como inteiro p depois fazer uma verificação, com base no
-				// numero de 1 a 3 corresponde
-				// a uma unidade diferente. Exemplo: 1 para ambulatorio, 2 para emergencia e 3
-				// para UTI.
-
+				prepS.setString(4, paciente.getAlergia());
+				prepS.setString(5, paciente.getUnidade());
+				
 				int result = prepS.executeUpdate();
 
 				if (result == 1) {
@@ -101,11 +92,10 @@ public class PacienteDAO {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
 
-		// nome,datanascimento,alergia e unidade
 		String nome = null;
 		Date dataNascimento = null;
-		int alergia = 0;
-		int unidade = 0;
+		String alergia = null;
+		String unidade = null;
 
 		String sql = "select * from Paciente where cpf like ?";
 
@@ -115,13 +105,15 @@ public class PacienteDAO {
 			prepS = con.prepareStatement(sql);
 			prepS.setString(1, paciente.getCpf());
 			ResultSet resultSet = prepS.executeQuery();
-
+			//NA HORA DE PRESCREVER UM MEDICAMENTO NA TELA DE PRESCRIÇÃO
+			//O RESULTSET.NEXT() É FALSE E NÃO SETTA AS INFOS PRA JOGAR NA TELA DE VOLTA
+			//RESULTANDO NUMA EXCEÇÃO PQ A DATA DE NASCIMENTO FICA NULL
 			while (resultSet.next()) {
 
 				nome = resultSet.getString(2);
 				dataNascimento = resultSet.getDate(3);
-				alergia = resultSet.getInt(4);
-				unidade = resultSet.getInt(5);
+				alergia = resultSet.getString(4);
+				unidade = resultSet.getString(5);
 			}
 			
 			paciente.setNome(nome);

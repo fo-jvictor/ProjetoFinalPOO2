@@ -8,14 +8,14 @@ public class Paciente {
 	private String cpf;
 	private String nome;
 	private Date dataNascimento;
-	private int alergia;
-	private int unidade;
+	private String alergia;
+	private String unidade;
 	// private list<Medicamento> Medicamentos;
 
 	public Paciente() {
 	}
 
-	public Paciente(String cpf, String nome, Date dataNascimento, int alergia, int unidade) {
+	public Paciente(String cpf, String nome, Date dataNascimento, String alergia, String unidade) {
 
 		if (isCPF(cpf)) {
 			this.cpf = cpf;
@@ -25,7 +25,7 @@ public class Paciente {
 		this.alergia = alergia;
 		this.unidade = unidade;
 	}
-
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -50,19 +50,19 @@ public class Paciente {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public int getAlergia() {
+	public String getAlergia() {
 		return alergia;
 	}
 
-	public void setAlergia(int alergia) {
+	public void setAlergia(String alergia) {
 		this.alergia = alergia;
 	}
 
-	public int getUnidade() {
+	public String getUnidade() {
 		return unidade;
 	}
 
-	public void setUnidade(int unidade) {
+	public void setUnidade(String unidade) {
 		this.unidade = unidade;
 	}
 

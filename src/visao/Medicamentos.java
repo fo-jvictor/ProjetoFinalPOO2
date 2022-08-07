@@ -56,6 +56,11 @@ public class Medicamentos extends JPanel {
 		buttonGroup.add(checkboxGluten);
 		buttonGroup.add(checkboxPenicilina);
 		
+		checkboxGluten.setActionCommand("Gluten");
+		checkboxDipirona.setActionCommand("Dipirona");
+		checkboxFrutosdomar.setActionCommand("Frutos do Mar");
+		checkboxPenicilina.setActionCommand("Penicilina");
+		
 		btnSalvar = new JButton("Salvar");
 		add(btnSalvar, "flowx,cell 0 16 2 1,growx");
 		

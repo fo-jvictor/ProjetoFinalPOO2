@@ -68,6 +68,11 @@ public class admissaoPaciente extends JPanel {
 		buttonGroup.add(checkboxFrutosdoMar);
 		buttonGroup.add(checkboxPenicilina);
 		
+		checkboxGluten.setActionCommand("Gluten");
+		checkboxDipirona.setActionCommand("Dipirona");
+		checkboxFrutosdoMar.setActionCommand("Frutos do Mar");
+		checkboxPenicilina.setActionCommand("Penicilina");
+		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblNome, "cell 0 6,alignx trailing");
@@ -93,7 +98,8 @@ public class admissaoPaciente extends JPanel {
 		comboBox.addItem("Selecione a unidade");
 		comboBox.addItem("Ambulatorio");
 		comboBox.addItem("Emergencia");
-		comboBox.addItem("UTI");
+		comboBox.addItem("UTI");		
+		
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 14));

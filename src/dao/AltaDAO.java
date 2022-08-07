@@ -33,7 +33,6 @@ public class AltaDAO {
 				if(result==1)
 				{
 					ClasseConexaoMySQL.fecharConexao();
-					System.out.println("AltaDAO teste");
 					return true;
 				}
 				

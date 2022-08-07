@@ -29,7 +29,7 @@ public class MedicamentoDAO {
 				prepS = con.prepareStatement(sql);
 				prepS.setString(1, medicamento.getCodigoBarra());
 				prepS.setString(2, medicamento.getNome());
-				prepS.setInt(3, medicamento.getAlergia());
+				prepS.setString(3, medicamento.getAlergia());
 				
 				int result = prepS.executeUpdate();
 				
@@ -56,7 +56,7 @@ public class MedicamentoDAO {
 		con = ClasseConexaoMySQL.getCon();
 		
 		String nome = null;
-		int alergia = 0;
+		String alergia = null;
 		
 		if(con!=null)
 		{
@@ -71,7 +71,7 @@ public class MedicamentoDAO {
 				while(resultSet.next())
 				{
 					nome = resultSet.getString(2);
-					alergia = resultSet.getInt(3);					
+					alergia = resultSet.getString(3);					
 				}
 				
 				medicamento.setNome(nome);
@@ -104,7 +104,7 @@ public class MedicamentoDAO {
 				prepS = con.prepareStatement(sql);
 				prepS.setString(1, medicamento.getCodigoBarra());
 				prepS.setString(2, medicamento.getNome());
-				prepS.setInt(3, medicamento.getAlergia());
+				prepS.setString(3, medicamento.getAlergia());
 				int result = prepS.executeUpdate();
 				
 				if(result==1)

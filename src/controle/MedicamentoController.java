@@ -20,36 +20,34 @@ public class MedicamentoController implements ActionListener{
 		this.janelaPrincipal.getMedicamentos().getBtnSalvar().addActionListener(this);
 		this.janelaPrincipal.getMedicamentos().getBtnCancelar().addActionListener(this);
 		this.janelaPrincipal.getMedicamentos().getBtnAtualizar().addActionListener(this);
-		this.janelaPrincipal.getMedicamentos().getBtnRemover().addActionListener(this);
-		this.janelaPrincipal.getMedicamentos().getCheckboxDipirona().setActionCommand("Dipirona");
-		this.janelaPrincipal.getMedicamentos().getCheckboxFrutosdomar().setActionCommand("Frutos do Mar");
-		this.janelaPrincipal.getMedicamentos().getCheckboxGluten().setActionCommand("Gluten");
-		this.janelaPrincipal.getMedicamentos().getCheckboxPenicilina().setActionCommand("Penicilina");
+		this.janelaPrincipal.getMedicamentos().getBtnRemover().addActionListener(this);	
 	}
 	
 	public void cadastraMedicamento()
 	{
 		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
 		String nome = this.janelaPrincipal.getMedicamentos().getFieldNome().getText();
-		int alergia2=0;
 		String alergia = this.janelaPrincipal.getMedicamentos().getButtonGroup().getSelection().getActionCommand();
-		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia2);
-		medicamentoDAO.cadastraMedicamento(medicamento);
+		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia);
+		if(medicamentoDAO.cadastraMedicamento(medicamento))
+		{
+			limpaTela();
+		}
 	}
 	
 	public void atualizaMedicamento()
 	{
 		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
 		String nome = this.janelaPrincipal.getMedicamentos().getFieldNome().getText();
-		int alergia2=0;
-		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia2);
+		String alergia = this.janelaPrincipal.getMedicamentos().getButtonGroup().getSelection().getActionCommand();
+		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia);
 		medicamentoDAO.atualizaMedicamento(medicamento);		
 	}
 	
 	public void removeMedicamento()
 	{
 		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
-		Medicamento medicamento = new Medicamento(codigoBarra,null,0);
+		Medicamento medicamento = new Medicamento(codigoBarra,null,null);
 		medicamentoDAO.removeMedicamento(medicamento);
 	}
 	
@@ -63,9 +61,7 @@ public class MedicamentoController implements ActionListener{
 		
 		if (e.getActionCommand().equals("Cancelar"))
 		{
-			this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().setText("");
-			this.janelaPrincipal.getMedicamentos().getFieldNome().setText("");
-			this.janelaPrincipal.getMedicamentos().getButtonGroup().clearSelection();
+			limpaTela();
 			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
 		}
 		
@@ -81,6 +77,11 @@ public class MedicamentoController implements ActionListener{
 		
 	}
 	
-	
+	public void limpaTela()
+	{
+		this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().setText("");
+		this.janelaPrincipal.getMedicamentos().getFieldNome().setText("");
+		this.janelaPrincipal.getMedicamentos().getButtonGroup().clearSelection();
+	}
 	
 }

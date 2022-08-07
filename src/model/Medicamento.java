@@ -4,13 +4,13 @@ public class Medicamento {
 
 	private String codigoBarra;
 	private String nome;
-	private int alergia;
+	private String alergia;
 	
 	public Medicamento() {
 		
 	}
 
-	public Medicamento(String codigoBarra, String nome, int alergia) {
+	public Medicamento(String codigoBarra, String nome, String alergia) {
 		super();
 		this.codigoBarra = codigoBarra;
 		this.nome = nome;
@@ -38,13 +38,15 @@ public class Medicamento {
 		this.nome = nome;
 	}
 
-	public int getAlergia() {
+	public String getAlergia() {
 		return alergia;
 	}
 
-	public void setAlergia(int alergia) {
+	public void setAlergia(String alergia) {
 		this.alergia = alergia;
 	}
+
+	
 	
 	
 	
