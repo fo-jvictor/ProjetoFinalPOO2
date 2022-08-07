@@ -77,7 +77,11 @@ public class listaInternados extends JPanel {
 		scrollPane_3.setViewportView(textAreaListaDeInternadosAlergias);
 		
 		buttonListaDeInternadosCancelar = new JButton("Cancelar");			
-		;
+		
+		textAreaListaDeInternadosNome.setEditable(false);
+		textAreaListaDeInternadosUnidade.setEditable(false);
+		textAreaListaDeInternadosDataNasc.setEditable(false);
+		textAreaListaDeInternadosAlergias.setEditable(false);
 		
 		buttonListaDeInternadosSalvar = new JButton("Salvar");
 		buttonListaDeInternadosSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
