@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import java.awt.Font;
 
 public class Medicamentos extends JPanel {
 	private JTextField fieldCodigodebarra;
@@ -20,6 +21,7 @@ public class Medicamentos extends JPanel {
 	private JCheckBox checkboxDipirona;
 	private JButton btnRemover;
 	private JButton btnAtualizar;
+	private JLabel lblNewLabel_3;
 
 	/**
 	 * Create the panel.
@@ -27,8 +29,12 @@ public class Medicamentos extends JPanel {
 	public Medicamentos() {
 		setLayout(new MigLayout("", "[96.00][][123.00,grow][83.00,grow][grow][grow]", "[][][][][][][][][][][][][][][][][]"));
 		
+		lblNewLabel_3 = new JLabel("MEDICAMENTOS");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 20));
+		add(lblNewLabel_3, "cell 0 0");
+		
 		JLabel lblNewLabel = new JLabel("Dados do Medicamento:");
-		add(lblNewLabel, "cell 0 1 2 1");
+		add(lblNewLabel, "cell 0 2 2 1");
 		
 		JLabel lblNewLabel_1 = new JLabel("Cod Barras:");
 		add(lblNewLabel_1, "flowx,cell 0 3 2 1,alignx left");

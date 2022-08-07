@@ -1,17 +1,21 @@
 package dao;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Paciente;
 
 public class PacienteDAO {
 
 	private static Connection con;
+	//private List<Paciente> pacientes = new ArrayList<>();
 
 	public PacienteDAO() {
 	}
@@ -91,7 +95,7 @@ public class PacienteDAO {
 	public static boolean consultaPaciente(Paciente paciente) {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
-
+		
 		String nome = null;
 		Date dataNascimento = null;
 		String alergia = null;
@@ -109,11 +113,12 @@ public class PacienteDAO {
 			//O RESULTSET.NEXT() É FALSE E NÃO SETTA AS INFOS PRA JOGAR NA TELA DE VOLTA
 			//RESULTANDO NUMA EXCEÇÃO PQ A DATA DE NASCIMENTO FICA NULL
 			while (resultSet.next()) {
-
+				
 				nome = resultSet.getString(2);
 				dataNascimento = resultSet.getDate(3);
 				alergia = resultSet.getString(4);
 				unidade = resultSet.getString(5);
+				
 			}
 			
 			paciente.setNome(nome);
@@ -130,5 +135,47 @@ public class PacienteDAO {
 		}
 
 	}
+	
+	public boolean consultaTodosPacientes()
+	{
+		ClasseConexaoMySQL.abrirConexaoMySQL();
+		con = ClasseConexaoMySQL.getCon();
+		
+		String cpf=null;
+		String nome = null;
+		Date datanascimento=null;
+		String alergia=null;
+		String unidade=null;
+		
+		if (con!=null)
+		{
+			String sql = "select * from Paciente";
+			PreparedStatement prepS;
+			
+			try {
+				prepS = con.prepareStatement(sql);
+				ResultSet resultSet = prepS.executeQuery();
+				
+				while(resultSet.next())
+				{
+					nome = resultSet.getString(2);
+					datanascimento = resultSet.getDate(3);
+					alergia = resultSet.getString(4);
+					unidade = resultSet.getString(5);
+					Paciente paciente = new Paciente(cpf,nome,datanascimento,alergia,unidade);					
+					//pacientes.add(paciente);
+				}
+				
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		
+		return false;
+		
+	}	
 
 }

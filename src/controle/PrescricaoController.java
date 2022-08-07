@@ -26,6 +26,7 @@ public class PrescricaoController implements ActionListener{
 		//ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
 		pacienteDAO = new PacienteDAO();
 		medicamentoDAO = new MedicamentoDAO();
+		prescricaoMedicamentoDAO = new PrescricaoMedicamentoDAO();
 		this.janelaPrincipal.getPrescricao().getBtnSalvar().addActionListener(this);
 		this.janelaPrincipal.getPrescricao().getBtnCancelar().addActionListener(this);
 	}
@@ -38,10 +39,7 @@ public class PrescricaoController implements ActionListener{
 		String cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
 		Paciente paciente = new Paciente(cpf, null, null, null, null);
 		
-		pacienteDAO.consultaPaciente(paciente);	
-		
-		//set Nome do paciente que agora voltou populado do banco de dados no FIELD nome;
-		//set DataNascimento do paciente no field Data Nasc;	
+		pacienteDAO.consultaPaciente(paciente);			
 		
 		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());		
 		

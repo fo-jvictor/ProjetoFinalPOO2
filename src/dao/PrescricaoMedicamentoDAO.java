@@ -12,8 +12,7 @@ public class PrescricaoMedicamentoDAO {
 	
 	private Connection con;
 
-	public PrescricaoMedicamentoDAO() {
-		
+	public PrescricaoMedicamentoDAO() {		
 	}
 
 	public boolean cadastraPrescricao(PrescricaoMedicamento prescricaoM)

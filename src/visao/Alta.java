@@ -9,18 +9,24 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.awt.Font;
 
 public class Alta extends JPanel {
 	private JTextField textField;
 	private JComboBox comboBox;
 	private JButton buttonSalvar;
 	private JButton buttonCancelar;
+	private JLabel lblNewLabel_2;
 	
 	/**
 	 * Create the panel.
 	 */
 	public Alta() {
 		setLayout(new MigLayout("", "[632.00][632.00][632.00][632.00][632.00][632.00,grow]", "[][][][][][][][][][][][][][][][]"));
+		
+		lblNewLabel_2 = new JLabel("ALTA");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		add(lblNewLabel_2, "cell 0 1");
 		
 		JLabel lblNewLabel = new JLabel("CPF:");
 		add(lblNewLabel, "flowx,cell 1 5,alignx right");

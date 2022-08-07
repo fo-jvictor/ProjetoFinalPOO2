@@ -1,5 +1,6 @@
 package controle;
 
+import model.PrescricaoMedicamento;
 import visao.JanelaPrincipal;
 
 public class Main {

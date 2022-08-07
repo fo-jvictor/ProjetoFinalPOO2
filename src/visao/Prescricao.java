@@ -97,6 +97,10 @@ public class Prescricao extends JPanel {
 		add(tfMedicamentoProtegido, "cell 2 14 2 1,growx");
 		tfMedicamentoProtegido.setColumns(10);
 		
+		tfMedicamentoProtegido.setEditable(false);
+		tfNome.setEditable(false);
+		tfDataNasc.setEditable(false);
+		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSalvar.setHorizontalAlignment(SwingConstants.RIGHT);
