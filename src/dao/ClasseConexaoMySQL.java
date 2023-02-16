@@ -19,8 +19,8 @@ public class ClasseConexaoMySQL {
 		//mudar as informacoes de acordo com a configuração local do mySQL
 		String servidor="localhost";
 		String banco="projetofinalPOO";
-		String usuario="root";
-		String senha="Password12";
+		String usuario="jvictor01";
+		String senha="Password@12";
 		String url="jdbc:mysql://"+servidor+":3306/"+banco;
 		//jdbc:mysql://localhost:3306/db
 		
