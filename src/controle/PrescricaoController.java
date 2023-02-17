@@ -37,9 +37,9 @@ public class PrescricaoController implements ActionListener{
 	    DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");		
 		
 		String cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
-		Paciente paciente = new Paciente(cpf, null, null, null, null);
+		//Paciente paciente = new Paciente(cpf, null, null, null, null);
 		
-		pacienteDAO.consultaPaciente(paciente);			
+		pacienteDAO.consultaPaciente(cpf);			
 		
 		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());		
 		

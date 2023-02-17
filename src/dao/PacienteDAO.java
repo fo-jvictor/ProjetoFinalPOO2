@@ -1,5 +1,10 @@
 package dao;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 
 import java.sql.Date;
@@ -38,6 +43,8 @@ public class PacienteDAO {
 				prepS.setString(2, paciente.getNome());				
 				prepS.setDate(3, new java.sql.Date(paciente.getDataNascimento().getTime()));
 				prepS.setString(4, paciente.getAlergia());
+				//bytes = serialize(paciente.getAlergia());
+				//prepS.setBytes(4, bytes);
 				prepS.setString(5, paciente.getUnidade());
 				
 				int result = prepS.executeUpdate();
@@ -92,7 +99,7 @@ public class PacienteDAO {
 		return false;
 	}
 
-	public static boolean consultaPaciente(Paciente paciente) {
+	public static Paciente consultaPaciente(String cpf) {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
 		
@@ -107,7 +114,7 @@ public class PacienteDAO {
 
 		try {
 			prepS = con.prepareStatement(sql);
-			prepS.setString(1, paciente.getCpf());
+			prepS.setString(1, cpf);
 			ResultSet resultSet = prepS.executeQuery();
 			//NA HORA DE PRESCREVER UM MEDICAMENTO NA TELA DE PRESCRIÇÃO
 			//O RESULTSET.NEXT() É FALSE E NÃO SETTA AS INFOS PRA JOGAR NA TELA DE VOLTA
@@ -117,22 +124,28 @@ public class PacienteDAO {
 				nome = resultSet.getString(2);
 				dataNascimento = resultSet.getDate(3);
 				alergia = resultSet.getString(4);
+				//byte [] bytes = resultSet.getBytes(4);
+				//List<String> alergias = deserialize(bytes);
+				//
 				unidade = resultSet.getString(5);
+				Paciente p = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
+				return p;
 				
 			}
 			
-			paciente.setNome(nome);
-			paciente.setDataNascimento(dataNascimento);
-			paciente.setAlergia(alergia);
-			paciente.setUnidade(unidade);
+//			paciente.setNome(nome);
+//			paciente.setDataNascimento(dataNascimento);
+//			paciente.setAlergia(alergia);
+//			paciente.setUnidade(unidade);
 			con.close();
-			return true;
+//			return true;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
 		}
+		//ARRUMAR ISSO AQUIII
+		return null;
 
 	}
 	
@@ -177,5 +190,19 @@ public class PacienteDAO {
 		return false;
 		
 	}	
+	
+	private byte[] serialize(List<String> object) throws IOException {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutputStream oos =  new ObjectOutputStream(bos);
+		oos.writeObject(object);
+		oos.flush();
+		return bos.toByteArray();
+	}
+	
+	  private static List<String> deserialize(byte[] bytes) throws ClassNotFoundException, IOException {
+	        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+	        ObjectInputStream ois = new ObjectInputStream(bis);
+	        return (List<String>) ois.readObject();
+	    }
 
 }

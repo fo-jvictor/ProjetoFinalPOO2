@@ -63,10 +63,10 @@ public class admissaoPaciente extends JPanel {
 		checkboxPenicilina = new JCheckBox("Penicilina");
 		add(checkboxPenicilina, "cell 3 4");
 		
-		buttonGroup.add(checkboxGluten);
-		buttonGroup.add(checkboxDipirona);
-		buttonGroup.add(checkboxFrutosdoMar);
-		buttonGroup.add(checkboxPenicilina);
+//		buttonGroup.add(checkboxGluten);
+//		buttonGroup.add(checkboxDipirona);
+//		buttonGroup.add(checkboxFrutosdoMar);
+//		buttonGroup.add(checkboxPenicilina);
 		
 		checkboxGluten.setActionCommand("Gluten");
 		checkboxDipirona.setActionCommand("Dipirona");

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import dao.PacienteDAO;
 import model.Paciente;
@@ -43,8 +44,21 @@ public class PacienteController implements ActionListener {
 			String cpf = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText();
 			String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
 			Date dataNascimento = sdf.parse(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
-			String alergia= this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().getSelection().getActionCommand();
+			
+			//get selected boxes from combox
+			
+			List<String> alergias = null;
+			alergias.add("");
+			
+			String alergia= this.janelaPrincipal
+					.getPanelAdmissaoPaciente()
+					.getButtonGroup()
+					.getSelection()
+					.getActionCommand();
+			
+			
 			String unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedItem().toString();
+			
 		
 			Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
 			pacienteDAO.cadastraPaciente(paciente);
