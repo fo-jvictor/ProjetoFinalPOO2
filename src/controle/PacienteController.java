@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JCheckBox;
+
 import dao.PacienteDAO;
 import model.Paciente;
 import visao.JanelaPrincipal;
@@ -38,6 +40,7 @@ public class PacienteController implements ActionListener {
 	public void cadastraPaciente()
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		List<String> alergias = null;
 		
 		try {	
 			
@@ -45,10 +48,15 @@ public class PacienteController implements ActionListener {
 			String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
 			Date dataNascimento = sdf.parse(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
 			
-			//get selected boxes from combox
-			
-			List<String> alergias = null;
-			alergias.add("");
+			String frutosDoMar = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxFrutosdoMar().toString();
+			String penicilina = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxPenicilina().toString();
+			String gluten = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxGluten().toString();
+			String dipirona = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxDipirona().toString();
+
+			alergias.add(frutosDoMar);
+			alergias.add(penicilina);
+			alergias.add(gluten);
+			alergias.add(dipirona);
 			
 			String alergia= this.janelaPrincipal
 					.getPanelAdmissaoPaciente()

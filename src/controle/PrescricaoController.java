@@ -39,7 +39,7 @@ public class PrescricaoController implements ActionListener{
 		String cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
 		//Paciente paciente = new Paciente(cpf, null, null, null, null);
 		
-		pacienteDAO.consultaPaciente(cpf);			
+		Paciente paciente = pacienteDAO.consultaPaciente(cpf);			
 		
 		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());		
 		
