@@ -64,7 +64,7 @@ public class PrescricaoController implements ActionListener, KeyListener{
 		for (JCheckBox cb : checkboxes) {
 			for (String alergia : alergiasPaciente) {
 				if (alergia.equals(cb.getText())) {
-					cb.isSelected();
+					cb.setSelected(true);
 				}				
 			}
 		}
