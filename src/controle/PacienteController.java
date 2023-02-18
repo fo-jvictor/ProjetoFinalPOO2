@@ -3,8 +3,10 @@ package controle;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,10 +39,16 @@ public class PacienteController implements ActionListener {
 		
 	}
 	
-	public void cadastraPaciente()
+	public void cadastraPaciente() throws IOException
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		List<String> alergias = null;
+		List<String> alergias = new ArrayList<>();
+		List<JCheckBox> checkboxes = new ArrayList<>();
+		
+		checkboxes.add(this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxFrutosdoMar());
+		checkboxes.add(this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxPenicilina());
+		checkboxes.add(this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxGluten());
+		checkboxes.add(this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxDipirona());
 		
 		try {	
 			
@@ -48,28 +56,19 @@ public class PacienteController implements ActionListener {
 			String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
 			Date dataNascimento = sdf.parse(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
 			
-			String frutosDoMar = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxFrutosdoMar().toString();
-			String penicilina = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxPenicilina().toString();
-			String gluten = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxGluten().toString();
-			String dipirona = this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxDipirona().toString();
-
-			alergias.add(frutosDoMar);
-			alergias.add(penicilina);
-			alergias.add(gluten);
-			alergias.add(dipirona);
-			
-			String alergia= this.janelaPrincipal
-					.getPanelAdmissaoPaciente()
-					.getButtonGroup()
-					.getSelection()
-					.getActionCommand();
-			
-			
+			for(JCheckBox checkbox : checkboxes) {
+				if (checkbox.isSelected()) {
+					alergias.add(checkbox.getText());
+				}
+			}
+						
 			String unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedItem().toString();
 			
 		
-			Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
+			Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergias,unidade);
 			pacienteDAO.cadastraPaciente(paciente);
+			
+			System.out.println(paciente);
 			
 		}catch(ParseException e)
 			{
@@ -82,7 +81,12 @@ public class PacienteController implements ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals("Salvar"))
 		{
-			cadastraPaciente();
+			try {
+				cadastraPaciente();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		if(e.getActionCommand().equals("Cancelar"))

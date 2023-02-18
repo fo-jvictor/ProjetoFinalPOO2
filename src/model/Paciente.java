@@ -9,21 +9,25 @@ public class Paciente {
 	private String cpf;
 	private String nome;
 	private Date dataNascimento;
-	private String alergia;
-	private String unidade;
 	private List<String> alergias;
+	private String unidade;
 	// private list<Medicamento> Medicamentos;
 
 	public Paciente() {
 	}
 
-	public Paciente(String cpf, String nome, Date dataNascimento, String alergia, String unidade) {
+	public Paciente(String cpf, String nome, Date dataNascimento, List<String> alergias, String unidade) {
 
 		this.cpf = cpf;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
-		this.alergia = alergia;
+		this.alergias = alergias;
 		this.unidade = unidade;
+	}
+	
+
+	public List<String> getAlergias() {
+		return alergias;
 	}
 	
 	public String getCpf() {
@@ -50,14 +54,6 @@ public class Paciente {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getAlergia() {
-		return alergia;
-	}
-
-	public void setAlergia(String alergia) {
-		this.alergia = alergia;
-	}
-
 	public String getUnidade() {
 		return unidade;
 	}
@@ -68,8 +64,8 @@ public class Paciente {
 
 	@Override
 	public String toString() {
-		return "Paciente [cpf=" + cpf + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", alergia=" + alergia
-				+ "]";
+		return "Paciente [cpf=" + cpf + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", alergias="
+				+ alergias + ", unidade=" + unidade + "]";
 	}
 
 }

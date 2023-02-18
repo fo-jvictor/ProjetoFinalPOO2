@@ -25,10 +25,7 @@ public class PacienteDAO {
 	public PacienteDAO() {
 	}
 
-	// metodos crud
-	// recebe os dados da classe controller
-
-	public static boolean cadastraPaciente(Paciente paciente) {
+	public static boolean cadastraPaciente(Paciente paciente) throws IOException {
 
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
@@ -42,9 +39,8 @@ public class PacienteDAO {
 				prepS.setString(1, paciente.getCpf());
 				prepS.setString(2, paciente.getNome());				
 				prepS.setDate(3, new java.sql.Date(paciente.getDataNascimento().getTime()));
-				prepS.setString(4, paciente.getAlergia());
-				//bytes = serialize(paciente.getAlergia());
-				//prepS.setBytes(4, bytes);
+				byte[] bytes = serialize(paciente.getAlergias());;
+				prepS.setBytes(4, bytes);
 				prepS.setString(5, paciente.getUnidade());
 				
 				int result = prepS.executeUpdate();
@@ -61,10 +57,13 @@ public class PacienteDAO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
+			} catch(IOException e) {
+				e.printStackTrace();
 			}
 
 		}
-		return false;
+		return true;
 	}
 
 	public static boolean altaPaciente(Paciente paciente) {
@@ -99,14 +98,9 @@ public class PacienteDAO {
 		return false;
 	}
 
-	public static Paciente consultaPaciente(String cpf) {
+	public static Paciente consultaPaciente(String cpf) throws ClassNotFoundException, IOException {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
-		
-		String nome = null;
-		Date dataNascimento = null;
-		String alergia = null;
-		String unidade = null;
 
 		String sql = "select * from Paciente where cpf like ?";
 
@@ -121,22 +115,17 @@ public class PacienteDAO {
 			//RESULTANDO NUMA EXCEÇÃO PQ A DATA DE NASCIMENTO FICA NULL
 			while (resultSet.next()) {
 				
-				nome = resultSet.getString(2);
-				dataNascimento = resultSet.getDate(3);
-				alergia = resultSet.getString(4);
-				//byte [] bytes = resultSet.getBytes(4);
-				//List<String> alergias = deserialize(bytes);
+				String nome = resultSet.getString(2);
+				Date dataNascimento = resultSet.getDate(3);
+				byte [] bytes = resultSet.getBytes(4);
+				List<String> alergias = deserialize(bytes);
 				//
-				unidade = resultSet.getString(5);
-				Paciente p = new Paciente(cpf,nome,dataNascimento,alergia,unidade);
+				String unidade = resultSet.getString(5);
+				Paciente p = new Paciente(cpf,nome,dataNascimento,alergias,unidade);
 				return p;
 				
 			}
 			
-//			paciente.setNome(nome);
-//			paciente.setDataNascimento(dataNascimento);
-//			paciente.setAlergia(alergia);
-//			paciente.setUnidade(unidade);
 			con.close();
 //			return true;
 
@@ -149,16 +138,11 @@ public class PacienteDAO {
 
 	}
 	
-	public boolean consultaTodosPacientes()
+	public boolean consultaTodosPacientes() throws ClassNotFoundException, IOException
 	{
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
 		
-		String cpf=null;
-		String nome = null;
-		Date datanascimento=null;
-		String alergia=null;
-		String unidade=null;
 		
 		if (con!=null)
 		{
@@ -171,12 +155,16 @@ public class PacienteDAO {
 				
 				while(resultSet.next())
 				{
-					nome = resultSet.getString(2);
-					datanascimento = resultSet.getDate(3);
-					alergia = resultSet.getString(4);
-					unidade = resultSet.getString(5);
-					Paciente paciente = new Paciente(cpf,nome,datanascimento,alergia,unidade);					
-					//pacientes.add(paciente);
+
+					String cpf=null;
+					String nome = resultSet.getString(2);
+					Date datanascimento = resultSet.getDate(3);
+					
+					byte [] bytes = resultSet.getBytes(4);
+					List<String> alergias = deserialize(bytes);
+					
+					String unidade = resultSet.getString(5);
+					Paciente paciente = new Paciente(cpf,nome,datanascimento,alergias,unidade);					
 				}
 				
 
@@ -191,7 +179,7 @@ public class PacienteDAO {
 		
 	}	
 	
-	private byte[] serialize(List<String> object) throws IOException {
+	private static byte[] serialize(List<String> object) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos =  new ObjectOutputStream(bos);
 		oos.writeObject(object);
