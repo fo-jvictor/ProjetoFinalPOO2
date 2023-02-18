@@ -20,17 +20,10 @@ public class PacienteController implements ActionListener {
 
 	private PacienteDAO pacienteDAO;
 	private JanelaPrincipal janelaPrincipal;
-	//private CardLayout card;
-
-	
-	//manda os dados dessa classe para PacienteDAO
 	
 	public PacienteController(JanelaPrincipal janelaPrincipal)
 	{
-		//Vou precisar acessar a janelaPrincipal para acessar o Panel referente ao cadastro
-		//de paciente. Então através dos getters dos campos do Panel de cadastro de Paciente eu pego os dados
-		//insiro eles em variaveis e declaro um novo objeto de paciente, passando para o PacienteDAO realizar
-		//as operações de persistencia no banco de dados;		
+	
 		this.janelaPrincipal=janelaPrincipal;
 		pacienteDAO = new PacienteDAO();
 		this.janelaPrincipal.getPanelAdmissaoPaciente().getBtnSalvar().addActionListener(this);
@@ -39,7 +32,7 @@ public class PacienteController implements ActionListener {
 		
 	}
 	
-	public void cadastraPaciente() throws IOException
+	public void cadastraPaciente()
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		List<String> alergias = new ArrayList<>();
@@ -68,8 +61,6 @@ public class PacienteController implements ActionListener {
 			Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergias,unidade);
 			pacienteDAO.cadastraPaciente(paciente);
 			
-			System.out.println(paciente);
-			
 		}catch(ParseException e)
 			{
 				e.printStackTrace();
@@ -81,12 +72,7 @@ public class PacienteController implements ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals("Salvar"))
 		{
-			try {
-				cadastraPaciente();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			cadastraPaciente();
 		}
 		
 		if(e.getActionCommand().equals("Cancelar"))

@@ -25,7 +25,7 @@ public class PacienteDAO {
 	public PacienteDAO() {
 	}
 
-	public static boolean cadastraPaciente(Paciente paciente) throws IOException {
+	public static boolean cadastraPaciente(Paciente paciente) {
 
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
@@ -98,7 +98,7 @@ public class PacienteDAO {
 		return false;
 	}
 
-	public static Paciente consultaPaciente(String cpf) throws ClassNotFoundException, IOException {
+	public static Paciente consultaPaciente(String cpf) {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
 
@@ -117,12 +117,12 @@ public class PacienteDAO {
 				
 				String nome = resultSet.getString(2);
 				Date dataNascimento = resultSet.getDate(3);
+				
 				byte [] bytes = resultSet.getBytes(4);
 				List<String> alergias = deserialize(bytes);
-				//
+				
 				String unidade = resultSet.getString(5);
-				Paciente p = new Paciente(cpf,nome,dataNascimento,alergias,unidade);
-				return p;
+				return new Paciente(cpf,nome,dataNascimento,alergias,unidade);
 				
 			}
 			
@@ -131,6 +131,10 @@ public class PacienteDAO {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		//ARRUMAR ISSO AQUIII
