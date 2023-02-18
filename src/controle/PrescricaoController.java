@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.JCheckBox;
+import javax.swing.JTextField;
 
 import dao.MedicamentoDAO;
 import dao.PacienteDAO;
@@ -27,6 +28,9 @@ public class PrescricaoController implements ActionListener, KeyListener{
 	private MedicamentoDAO medicamentoDAO;
 	private PrescricaoMedicamentoDAO prescricaoMedicamentoDAO;
 	
+	String cpf = null;
+	String codigoBarra = null;
+	
 	public PrescricaoController(JanelaPrincipal janelaPrincipal)
 	{
 		this.janelaPrincipal=janelaPrincipal;		
@@ -37,6 +41,7 @@ public class PrescricaoController implements ActionListener, KeyListener{
 		this.janelaPrincipal.getPrescricao().getBtnSalvar().addActionListener(this);
 		this.janelaPrincipal.getPrescricao().getBtnCancelar().addActionListener(this);
 		this.janelaPrincipal.getPrescricao().getTfCPF().addKeyListener(this);
+		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().addKeyListener(this);
 	}
 	
 	public void consultaPaciente()
@@ -51,7 +56,7 @@ public class PrescricaoController implements ActionListener, KeyListener{
 		
 	    DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");		
 		
-		String cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
+		cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
 		
 		Paciente paciente = pacienteDAO.consultaPaciente(cpf);			
 		
@@ -71,17 +76,25 @@ public class PrescricaoController implements ActionListener, KeyListener{
 		
 	}
 	
-	public void prescreveMedicamento() {
+	public void consultaMedicamento() {
 		
-		String codigoBarra = this.janelaPrincipal.getPrescricao().getTfMedicamento().getText();
+		codigoBarra = this.janelaPrincipal.getPrescricao().getTfMedicamento().getText();
 		Medicamento medicamento = new Medicamento(codigoBarra,null,null);		
 		medicamentoDAO.consultaMedicamento(medicamento);	
 		
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
 		
-		//PrescricaoMedicamento prescricaoM = new PrescricaoMedicamento(cpf, codigoBarra);		
-		//prescricaoMedicamentoDAO.cadastraPrescricao(prescricaoM);
+	}
+	
+	public void prescreveMedicamento() {
 		
+		if (cpf.isEmpty() || cpf.isBlank() && codigoBarra.isEmpty() || codigoBarra.isBlank()) {
+			System.out.println("Enter with cpf and codigo de barra");
+		} else {
+			PrescricaoMedicamento prescricaoMedicamento = new PrescricaoMedicamento(cpf, codigoBarra);
+			prescricaoMedicamentoDAO.cadastraPrescricao(prescricaoMedicamento);
+		}
+
 	}
 	
 	public void limpaTela()
@@ -118,8 +131,16 @@ public class PrescricaoController implements ActionListener, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			consultaPaciente();
-		}
+            Object source = e.getSource();
+            if (source instanceof JTextField) {
+                JTextField textField = (JTextField) source;
+                if (textField.getName().equals("tfMedicamento")) {
+                    consultaMedicamento();
+                } else if (textField.getName().equals("tfCpf")) {
+                    consultaPaciente();
+                }
+            }
+        }
 	}
 
 	@Override
