@@ -80,8 +80,7 @@ public class PrescricaoController implements ActionListener, KeyListener{
 	public void consultaMedicamento() {
 		
 		codigoBarra = this.janelaPrincipal.getPrescricao().getTfMedicamento().getText();
-		Medicamento medicamento = new Medicamento(codigoBarra,null,null);		
-		medicamentoDAO.consultaMedicamento(medicamento);	
+		var medicamento = medicamentoDAO.consultaMedicamento(codigoBarra);	
 		
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
 		
@@ -104,7 +103,13 @@ public class PrescricaoController implements ActionListener, KeyListener{
 		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
 		this.janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
-		this.janelaPrincipal.getPrescricao().getTfNome().setText("");		
+		this.janelaPrincipal.getPrescricao().getTfNome().setText("");
+		
+		this.janelaPrincipal.getPrescricao().getCheckBoxFrutosMar().setSelected(false);
+		this.janelaPrincipal.getPrescricao().getCheckBoxDipirona().setSelected(false);
+		this.janelaPrincipal.getPrescricao().getCheckBoxGluten().setSelected(false);
+		this.janelaPrincipal.getPrescricao().getCheckBoxPenicilina().setSelected(false);
+
 	}
 
 	@Override
@@ -113,7 +118,7 @@ public class PrescricaoController implements ActionListener, KeyListener{
 		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals("Salvar"))
 		{
-			consultaPaciente();
+			prescreveMedicamento();
 		}
 		if(e.getActionCommand().equals("Cancelar"))
 		{

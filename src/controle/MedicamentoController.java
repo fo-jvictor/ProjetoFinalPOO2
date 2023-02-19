@@ -2,6 +2,10 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JCheckBox;
 
 import dao.MedicamentoDAO;
 import model.Medicamento;
@@ -25,10 +29,27 @@ public class MedicamentoController implements ActionListener{
 	
 	public void cadastraMedicamento()
 	{
+		
+		List<String> alergias = new ArrayList<>();
+		List<JCheckBox> checkboxes = new ArrayList<>();
+		
+		checkboxes.add(this.janelaPrincipal.getMedicamentos().getCheckboxFrutosdomar());
+		checkboxes.add(this.janelaPrincipal.getMedicamentos().getCheckboxPenicilina());
+		checkboxes.add(this.janelaPrincipal.getMedicamentos().getCheckboxGluten());
+		checkboxes.add(this.janelaPrincipal.getMedicamentos().getCheckboxDipirona());
+		
+		
 		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
 		String nome = this.janelaPrincipal.getMedicamentos().getFieldNome().getText();
-		String alergia = this.janelaPrincipal.getMedicamentos().getButtonGroup().getSelection().getActionCommand();
-		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia);
+
+		for(JCheckBox checkbox : checkboxes) {
+			if (checkbox.isSelected()) {
+				alergias.add(checkbox.getText());
+			}
+		}
+		
+		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergias);
+		
 		if(medicamentoDAO.cadastraMedicamento(medicamento))
 		{
 			limpaTela();

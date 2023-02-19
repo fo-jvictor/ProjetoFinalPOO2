@@ -20,7 +20,7 @@ import model.Paciente;
 public class PacienteDAO {
 
 	private static Connection con;
-	//private List<Paciente> pacientes = new ArrayList<>();
+	// private List<Paciente> pacientes = new ArrayList<>();
 
 	public PacienteDAO() {
 	}
@@ -34,15 +34,16 @@ public class PacienteDAO {
 			String sql = "insert into Paciente (cpf,nome,dataNascimento,alergia,unidade) values (?,?,?,?,?)";
 			PreparedStatement prepS;
 
-			try {				
+			try {
 				prepS = con.prepareStatement(sql);
 				prepS.setString(1, paciente.getCpf());
-				prepS.setString(2, paciente.getNome());				
+				prepS.setString(2, paciente.getNome());
 				prepS.setDate(3, new java.sql.Date(paciente.getDataNascimento().getTime()));
-				byte[] bytes = serialize(paciente.getAlergias());;
+
+				byte[] bytes = serialize(paciente.getAlergias());
 				prepS.setBytes(4, bytes);
 				prepS.setString(5, paciente.getUnidade());
-				
+
 				int result = prepS.executeUpdate();
 
 				if (result == 1) {
@@ -57,8 +58,8 @@ public class PacienteDAO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				
-			} catch(IOException e) {
+
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
@@ -110,22 +111,23 @@ public class PacienteDAO {
 			prepS = con.prepareStatement(sql);
 			prepS.setString(1, cpf);
 			ResultSet resultSet = prepS.executeQuery();
-			//NA HORA DE PRESCREVER UM MEDICAMENTO NA TELA DE PRESCRIÇÃO
-			//O RESULTSET.NEXT() É FALSE E NÃO SETTA AS INFOS PRA JOGAR NA TELA DE VOLTA
-			//RESULTANDO NUMA EXCEÇÃO PQ A DATA DE NASCIMENTO FICA NULL
+			// NA HORA DE PRESCREVER UM MEDICAMENTO NA TELA DE PRESCRIÇÃO
+			// O RESULTSET.NEXT() É FALSE E NÃO SETTA AS INFOS PRA JOGAR NA TELA DE VOLTA
+			// RESULTANDO NUMA EXCEÇÃO PQ A DATA DE NASCIMENTO FICA NULL
+			
+			//solucao : verificar se o metodo pra cadastrar um paciente vem com data
+			//caso nao venha, setar a data de nascimento com sysdate
 			while (resultSet.next()) {
-				
+
 				String nome = resultSet.getString(2);
 				Date dataNascimento = resultSet.getDate(3);
-				
-				byte [] bytes = resultSet.getBytes(4);
-				List<String> alergias = deserialize(bytes);
-				
+				List<String> alergias = deserialize(resultSet.getBytes(4));
+
 				String unidade = resultSet.getString(5);
-				return new Paciente(cpf,nome,dataNascimento,alergias,unidade);
-				
+				return new Paciente(cpf, nome, dataNascimento, alergias, unidade);
+
 			}
-			
+
 			con.close();
 //			return true;
 
@@ -137,40 +139,35 @@ public class PacienteDAO {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		//ARRUMAR ISSO AQUIII
+		// ARRUMAR ISSO AQUIII
 		return null;
 
 	}
-	
-	public boolean consultaTodosPacientes() throws ClassNotFoundException, IOException
-	{
+
+	public boolean consultaTodosPacientes() throws ClassNotFoundException, IOException {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
-		
-		
-		if (con!=null)
-		{
+
+		if (con != null) {
 			String sql = "select * from Paciente";
 			PreparedStatement prepS;
-			
+
 			try {
 				prepS = con.prepareStatement(sql);
 				ResultSet resultSet = prepS.executeQuery();
-				
-				while(resultSet.next())
-				{
 
-					String cpf=null;
+				while (resultSet.next()) {
+
+					String cpf = null;
 					String nome = resultSet.getString(2);
 					Date datanascimento = resultSet.getDate(3);
-					
-					byte [] bytes = resultSet.getBytes(4);
+
+					byte[] bytes = resultSet.getBytes(4);
 					List<String> alergias = deserialize(bytes);
-					
+
 					String unidade = resultSet.getString(5);
-					Paciente paciente = new Paciente(cpf,nome,datanascimento,alergias,unidade);					
+					Paciente paciente = new Paciente(cpf, nome, datanascimento, alergias, unidade);
 				}
-				
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -178,23 +175,23 @@ public class PacienteDAO {
 			}
 
 		}
-		
+
 		return false;
-		
-	}	
-	
+
+	}
+
 	private static byte[] serialize(List<String> object) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		ObjectOutputStream oos =  new ObjectOutputStream(bos);
+		ObjectOutputStream oos = new ObjectOutputStream(bos);
 		oos.writeObject(object);
 		oos.flush();
 		return bos.toByteArray();
 	}
-	
-	  private static List<String> deserialize(byte[] bytes) throws ClassNotFoundException, IOException {
-	        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-	        ObjectInputStream ois = new ObjectInputStream(bis);
-	        return (List<String>) ois.readObject();
-	    }
+
+	private static List<String> deserialize(byte[] bytes) throws ClassNotFoundException, IOException {
+		ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+		ObjectInputStream ois = new ObjectInputStream(bis);
+		return (List<String>) ois.readObject();
+	}
 
 }

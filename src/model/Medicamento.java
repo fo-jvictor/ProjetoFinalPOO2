@@ -1,25 +1,27 @@
 package model;
 
+import java.util.List;
+
 public class Medicamento {
 
 	private String codigoBarra;
 	private String nome;
-	private String alergia;
+	private List<String> alergias;
 	
 	public Medicamento() {
 		
 	}
 
-	public Medicamento(String codigoBarra, String nome, String alergia) {
+	public Medicamento(String codigoBarra, String nome, List<String> alergias) {
 		super();
 		this.codigoBarra = codigoBarra;
 		this.nome = nome;
-		this.alergia = alergia;
+		this.alergias = alergias;
 	}
 
 	@Override
 	public String toString() {
-		return "Medicamento [codigoBarra=" + codigoBarra + ", nome=" + nome + ", alergia=" + alergia + "]";
+		return "Medicamento [codigoBarra=" + codigoBarra + ", nome=" + nome + ", alergia=" + alergias + "]";
 	}
 
 	public String getCodigoBarra() {
@@ -38,16 +40,8 @@ public class Medicamento {
 		this.nome = nome;
 	}
 
-	public String getAlergia() {
-		return alergia;
+	public List<String> getAlergias() {
+		return alergias;
 	}
-
-	public void setAlergia(String alergia) {
-		this.alergia = alergia;
-	}
-
-	
-	
-	
-	
+		
 }
