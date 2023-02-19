@@ -67,7 +67,7 @@ public class PacienteDAO {
 		return true;
 	}
 
-	public static boolean altaPaciente(Paciente paciente) {
+	public static void altaPaciente(String cpf) {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
 
@@ -80,23 +80,20 @@ public class PacienteDAO {
 			try {
 
 				prepS = con.prepareStatement(sql);
-				prepS.setString(1, paciente.getCpf());
+				prepS.setString(1, cpf);
 				int result = prepS.executeUpdate();
 
 				if (result > 0) {
 					ClasseConexaoMySQL.fecharConexao();
 					System.out.println("Paciente recebeu alta com sucesso!");
-					return true;
 				}
 				ClasseConexaoMySQL.fecharConexao();
-				return false;
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return false;
 	}
 
 	public static Paciente consultaPaciente(String cpf) {

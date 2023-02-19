@@ -30,11 +30,10 @@ public class AltaController implements ActionListener {
 		
 		String cpf = this.janelaPrincipal.getAlta().getTextField().getText();
 		String motivoAlta = String.valueOf(this.janelaPrincipal.getAlta().getComboBox().getSelectedItem());
-		
-		Paciente paciente = new Paciente(cpf,null,null,null,null);		
+				
 		Alta alta = new Alta(cpf,motivoAlta);
 		altaDAO.altaPaciente(alta);
-		pacienteDAO.altaPaciente(paciente);
+		pacienteDAO.altaPaciente(cpf);
 
 	}
 
