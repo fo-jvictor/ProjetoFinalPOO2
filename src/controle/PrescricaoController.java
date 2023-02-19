@@ -41,6 +41,7 @@ public class PrescricaoController implements ActionListener, KeyListener{
 		this.janelaPrincipal.getPrescricao().getBtnSalvar().addActionListener(this);
 		this.janelaPrincipal.getPrescricao().getBtnCancelar().addActionListener(this);
 		this.janelaPrincipal.getPrescricao().getTfCPF().addKeyListener(this);
+		this.janelaPrincipal.getPrescricao().getTfMedicamento().addKeyListener(this);
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().addKeyListener(this);
 	}
 	
@@ -131,16 +132,16 @@ public class PrescricaoController implements ActionListener, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            Object source = e.getSource();
-            if (source instanceof JTextField) {
-                JTextField textField = (JTextField) source;
-                if (textField.getName().equals("tfMedicamento")) {
-                    consultaMedicamento();
-                } else if (textField.getName().equals("tfCpf")) {
-                    consultaPaciente();
-                }
-            }
+			if (e.getSource().equals(janelaPrincipal.getPrescricao().getTfMedicamento()))
+			{
+				consultaMedicamento();
+			}
+			
+			if (e.getSource().equals(janelaPrincipal.getPrescricao().getTfCPF())) {
+				consultaPaciente();
+			}
         }
+		
 	}
 
 	@Override
