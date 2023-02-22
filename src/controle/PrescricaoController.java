@@ -32,36 +32,40 @@ public class PrescricaoController implements ActionListener, KeyListener {
 	String codigoBarra = null;
 
 	public PrescricaoController(JanelaPrincipal janelaPrincipal) {
-		this.janelaPrincipal = janelaPrincipal;
+		janelaPrincipal = janelaPrincipal;
 		// ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
 		pacienteDAO = new PacienteDAO();
 		medicamentoDAO = new MedicamentoDAO();
 		prescricaoMedicamentoDAO = new PrescricaoMedicamentoDAO();
-		this.janelaPrincipal.getPrescricao().getBtnSalvar().addActionListener(this);
-		this.janelaPrincipal.getPrescricao().getBtnCancelar().addActionListener(this);
-		this.janelaPrincipal.getPrescricao().getTfCPF().addKeyListener(this);
-		this.janelaPrincipal.getPrescricao().getTfMedicamento().addKeyListener(this);
-		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().addKeyListener(this);
+		janelaPrincipal.getPrescricao().getBtnSalvar().addActionListener(this);
+		janelaPrincipal.getPrescricao().getBtnCancelar().addActionListener(this);
+		janelaPrincipal.getPrescricao().getTfCPF().addKeyListener(this);
+		janelaPrincipal.getPrescricao().getTfMedicamento().addKeyListener(this);
+		janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().addKeyListener(this);
 	}
 
 	public void consultaPaciente() {
 
 		List<JCheckBox> checkboxes = new ArrayList<>();
 
-		checkboxes.add(this.janelaPrincipal.getPrescricao().getCheckBoxGluten());
-		checkboxes.add(this.janelaPrincipal.getPrescricao().getCheckBoxDipirona());
-		checkboxes.add(this.janelaPrincipal.getPrescricao().getCheckBoxFrutosMar());
-		checkboxes.add(this.janelaPrincipal.getPrescricao().getCheckBoxPenicilina());
+		checkboxes.add(janelaPrincipal.getPrescricao().getCheckBoxGluten());
+		checkboxes.add(janelaPrincipal.getPrescricao().getCheckBoxDipirona());
+		checkboxes.add(janelaPrincipal.getPrescricao().getCheckBoxFrutosMar());
+		checkboxes.add(janelaPrincipal.getPrescricao().getCheckBoxPenicilina());
 
 		DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-		cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
+		cpf = janelaPrincipal.getPrescricao().getTfCPF().getText();
+
+		if (!validateIfEmptyOrBlankField(cpf)) {
+			
+		}
 
 		Paciente paciente = pacienteDAO.consultaPaciente(cpf);
 
-		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());
+		janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());
 
-		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText(sdf.format(paciente.getDataNascimento()));
+		janelaPrincipal.getPrescricao().getTfDataNasc().setText(sdf.format(paciente.getDataNascimento()));
 
 		List<String> alergiasPaciente = paciente.getAlergias().stream().collect(Collectors.toList());
 
@@ -77,10 +81,10 @@ public class PrescricaoController implements ActionListener, KeyListener {
 
 	public void consultaMedicamento() {
 
-		codigoBarra = this.janelaPrincipal.getPrescricao().getTfMedicamento().getText();
+		codigoBarra = janelaPrincipal.getPrescricao().getTfMedicamento().getText();
 		var medicamento = medicamentoDAO.consultaMedicamento(codigoBarra);
 
-		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
+		janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
 
 	}
 
@@ -88,7 +92,11 @@ public class PrescricaoController implements ActionListener, KeyListener {
 
 		cpf = janelaPrincipal.getPrescricao().getTfCPF().getText();
 		codigoBarra = janelaPrincipal.getPrescricao().getTfMedicamento().getText();
-		
+
+		if (!validateIfEmptyOrBlankField(codigoBarra) && !validateIfEmptyOrBlankField(cpf)) {
+
+		}
+
 		var medicamento = medicamentoDAO.consultaMedicamento(codigoBarra);
 		var paciente = pacienteDAO.consultaPaciente(cpf);
 
@@ -96,37 +104,38 @@ public class PrescricaoController implements ActionListener, KeyListener {
 
 		var alergiasPaciente = paciente.getAlergias().stream().collect(Collectors.toList());
 
-		if (cpf.isEmpty() || cpf.isBlank() && codigoBarra.isEmpty() || codigoBarra.isBlank()) {
-			System.out.println("Enter with cpf and codigo de barra");
-		}
-
-		boolean hasCommonElement = alergiasMedicamento.stream()
-				.filter(alergiasPaciente::contains)
-				.findAny()
+		boolean hasCommonElement = alergiasMedicamento.stream().filter(alergiasPaciente::contains).findAny()
 				.isPresent();
-		
+
 		if (!hasCommonElement) {
 			PrescricaoMedicamento prescricaoMedicamento = new PrescricaoMedicamento(cpf, codigoBarra);
 			prescricaoMedicamentoDAO.cadastraPrescricao(prescricaoMedicamento);
 		} else {
 			System.out.println("Medicamento contra indicado para o paciente");
 		}
-		
 
 	}
 
 	public void limpaTela() {
-		this.janelaPrincipal.getPrescricao().getTfCPF().setText("");
-		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
-		this.janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
-		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
-		this.janelaPrincipal.getPrescricao().getTfNome().setText("");
+		janelaPrincipal.getPrescricao().getTfCPF().setText("");
+		janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
+		janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
+		janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
+		janelaPrincipal.getPrescricao().getTfNome().setText("");
 
-		this.janelaPrincipal.getPrescricao().getCheckBoxFrutosMar().setSelected(false);
-		this.janelaPrincipal.getPrescricao().getCheckBoxDipirona().setSelected(false);
-		this.janelaPrincipal.getPrescricao().getCheckBoxGluten().setSelected(false);
-		this.janelaPrincipal.getPrescricao().getCheckBoxPenicilina().setSelected(false);
+		janelaPrincipal.getPrescricao().getCheckBoxFrutosMar().setSelected(false);
+		janelaPrincipal.getPrescricao().getCheckBoxDipirona().setSelected(false);
+		janelaPrincipal.getPrescricao().getCheckBoxGluten().setSelected(false);
+		janelaPrincipal.getPrescricao().getCheckBoxPenicilina().setSelected(false);
 
+	}
+
+	public Boolean validateIfEmptyOrBlankField(String field) {
+		if (field.isEmpty() || field.isBlank()) {
+			System.out.println("Enter with a valid" + field + "!");
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -138,7 +147,7 @@ public class PrescricaoController implements ActionListener, KeyListener {
 		}
 		if (e.getActionCommand().equals("Cancelar")) {
 			limpaTela();
-			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
+			janelaPrincipal.getCard().show(janelaPrincipal.getContentPane(), "panel");
 		}
 	}
 
