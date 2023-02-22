@@ -53,7 +53,7 @@ public class PacienteController implements ActionListener {
 				if (checkbox.isSelected()) {
 					alergias.add(checkbox.getText());
 				}
-			}
+			}	
 						
 			String unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedItem().toString();
 			

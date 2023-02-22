@@ -20,7 +20,6 @@ public class MedicamentoController implements ActionListener{
 	{
 		this.janelaPrincipal=janelaPrincipal;
 		medicamentoDAO = new MedicamentoDAO();
-		//ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
 		this.janelaPrincipal.getMedicamentos().getBtnSalvar().addActionListener(this);
 		this.janelaPrincipal.getMedicamentos().getBtnCancelar().addActionListener(this);
 		this.janelaPrincipal.getMedicamentos().getBtnAtualizar().addActionListener(this);

@@ -21,20 +21,19 @@ import model.Paciente;
 import model.PrescricaoMedicamento;
 import visao.JanelaPrincipal;
 
-public class PrescricaoController implements ActionListener, KeyListener{
-	
+public class PrescricaoController implements ActionListener, KeyListener {
+
 	private JanelaPrincipal janelaPrincipal;
 	private PacienteDAO pacienteDAO;
 	private MedicamentoDAO medicamentoDAO;
 	private PrescricaoMedicamentoDAO prescricaoMedicamentoDAO;
-	
+
 	String cpf = null;
 	String codigoBarra = null;
-	
-	public PrescricaoController(JanelaPrincipal janelaPrincipal)
-	{
-		this.janelaPrincipal=janelaPrincipal;		
-		//ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
+
+	public PrescricaoController(JanelaPrincipal janelaPrincipal) {
+		this.janelaPrincipal = janelaPrincipal;
+		// ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
 		pacienteDAO = new PacienteDAO();
 		medicamentoDAO = new MedicamentoDAO();
 		prescricaoMedicamentoDAO = new PrescricaoMedicamentoDAO();
@@ -44,67 +43,85 @@ public class PrescricaoController implements ActionListener, KeyListener{
 		this.janelaPrincipal.getPrescricao().getTfMedicamento().addKeyListener(this);
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().addKeyListener(this);
 	}
-	
-	public void consultaPaciente()
-	{
-		
+
+	public void consultaPaciente() {
+
 		List<JCheckBox> checkboxes = new ArrayList<>();
-		
+
 		checkboxes.add(this.janelaPrincipal.getPrescricao().getCheckBoxGluten());
 		checkboxes.add(this.janelaPrincipal.getPrescricao().getCheckBoxDipirona());
 		checkboxes.add(this.janelaPrincipal.getPrescricao().getCheckBoxFrutosMar());
 		checkboxes.add(this.janelaPrincipal.getPrescricao().getCheckBoxPenicilina());
-		
-	    DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");		
-		
+
+		DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 		cpf = this.janelaPrincipal.getPrescricao().getTfCPF().getText();
-		
-		Paciente paciente = pacienteDAO.consultaPaciente(cpf);			
-		
-		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());		
-		
+
+		Paciente paciente = pacienteDAO.consultaPaciente(cpf);
+
+		this.janelaPrincipal.getPrescricao().getTfNome().setText(paciente.getNome());
+
 		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText(sdf.format(paciente.getDataNascimento()));
-		
+
 		List<String> alergiasPaciente = paciente.getAlergias().stream().collect(Collectors.toList());
-		
+
 		for (JCheckBox cb : checkboxes) {
 			for (String alergia : alergiasPaciente) {
 				if (alergia.equals(cb.getText())) {
 					cb.setSelected(true);
-				}				
+				}
 			}
-		}
-		
-	}
-	
-	public void consultaMedicamento() {
-		
-		codigoBarra = this.janelaPrincipal.getPrescricao().getTfMedicamento().getText();
-		var medicamento = medicamentoDAO.consultaMedicamento(codigoBarra);	
-		
-		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
-		
-	}
-	
-	public void prescreveMedicamento() {
-		
-		if (cpf.isEmpty() || cpf.isBlank() && codigoBarra.isEmpty() || codigoBarra.isBlank()) {
-			System.out.println("Enter with cpf and codigo de barra");
-		} else {
-			PrescricaoMedicamento prescricaoMedicamento = new PrescricaoMedicamento(cpf, codigoBarra);
-			prescricaoMedicamentoDAO.cadastraPrescricao(prescricaoMedicamento);
 		}
 
 	}
-	
-	public void limpaTela()
-	{		
+
+	public void consultaMedicamento() {
+
+		codigoBarra = this.janelaPrincipal.getPrescricao().getTfMedicamento().getText();
+		var medicamento = medicamentoDAO.consultaMedicamento(codigoBarra);
+
+		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText(medicamento.getNome());
+
+	}
+
+	public void prescreveMedicamento() {
+
+		cpf = janelaPrincipal.getPrescricao().getTfCPF().getText();
+		codigoBarra = janelaPrincipal.getPrescricao().getTfMedicamento().getText();
+		
+		var medicamento = medicamentoDAO.consultaMedicamento(codigoBarra);
+		var paciente = pacienteDAO.consultaPaciente(cpf);
+
+		var alergiasMedicamento = medicamento.getAlergias().stream().collect(Collectors.toList());
+
+		var alergiasPaciente = paciente.getAlergias().stream().collect(Collectors.toList());
+
+		if (cpf.isEmpty() || cpf.isBlank() && codigoBarra.isEmpty() || codigoBarra.isBlank()) {
+			System.out.println("Enter with cpf and codigo de barra");
+		}
+
+		boolean hasCommonElement = alergiasMedicamento.stream()
+				.filter(alergiasPaciente::contains)
+				.findAny()
+				.isPresent();
+		
+		if (!hasCommonElement) {
+			PrescricaoMedicamento prescricaoMedicamento = new PrescricaoMedicamento(cpf, codigoBarra);
+			prescricaoMedicamentoDAO.cadastraPrescricao(prescricaoMedicamento);
+		} else {
+			System.out.println("Medicamento contra indicado para o paciente");
+		}
+		
+
+	}
+
+	public void limpaTela() {
 		this.janelaPrincipal.getPrescricao().getTfCPF().setText("");
 		this.janelaPrincipal.getPrescricao().getTfDataNasc().setText("");
 		this.janelaPrincipal.getPrescricao().getTfMedicamento().setText("");
 		this.janelaPrincipal.getPrescricao().getTfMedicamentoProtegido().setText("");
 		this.janelaPrincipal.getPrescricao().getTfNome().setText("");
-		
+
 		this.janelaPrincipal.getPrescricao().getCheckBoxFrutosMar().setSelected(false);
 		this.janelaPrincipal.getPrescricao().getCheckBoxDipirona().setSelected(false);
 		this.janelaPrincipal.getPrescricao().getCheckBoxGluten().setSelected(false);
@@ -114,48 +131,42 @@ public class PrescricaoController implements ActionListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		// TODO Auto-generated method stub
-		if (e.getActionCommand().equals("Salvar"))
-		{
+		if (e.getActionCommand().equals("Salvar")) {
 			prescreveMedicamento();
 		}
-		if(e.getActionCommand().equals("Cancelar"))
-		{
+		if (e.getActionCommand().equals("Cancelar")) {
 			limpaTela();
-			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");			
+			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
 		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (e.getSource().equals(janelaPrincipal.getPrescricao().getTfMedicamento()))
-			{
+			if (e.getSource().equals(janelaPrincipal.getPrescricao().getTfMedicamento())) {
 				consultaMedicamento();
 			}
-			
+
 			if (e.getSource().equals(janelaPrincipal.getPrescricao().getTfCPF())) {
 				consultaPaciente();
 			}
-        }
-		
+		}
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
-	
-	
 
+	}
 
 }

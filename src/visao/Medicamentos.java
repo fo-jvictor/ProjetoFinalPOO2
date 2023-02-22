@@ -45,7 +45,7 @@ public class Medicamentos extends JPanel {
 		JLabel lblNewLabel_4 = new JLabel("Contraindicado para as alergias:");
 		add(lblNewLabel_4, "cell 0 8 2 1");
 		
-		checkboxGluten = new JCheckBox("Glúten");
+		checkboxGluten = new JCheckBox("Gluten");
 		add(checkboxGluten, "flowx,cell 0 10,alignx center");
 		
 		checkboxFrutosdomar = new JCheckBox("Frutos do Mar");
