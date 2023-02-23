@@ -33,7 +33,6 @@ public class PrescricaoController implements ActionListener, KeyListener {
 
 	public PrescricaoController(JanelaPrincipal janelaPrincipal) {
 		janelaPrincipal = janelaPrincipal;
-		// ADD OS LISTENERS PROS BOTOES DOS PANELS E INSTANCIAR ELES AQUI
 		pacienteDAO = new PacienteDAO();
 		medicamentoDAO = new MedicamentoDAO();
 		prescricaoMedicamentoDAO = new PrescricaoMedicamentoDAO();
