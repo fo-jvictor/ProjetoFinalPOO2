@@ -32,7 +32,7 @@ public class PrescricaoController implements ActionListener, KeyListener {
 	String codigoBarra = null;
 
 	public PrescricaoController(JanelaPrincipal janelaPrincipal) {
-		janelaPrincipal = janelaPrincipal;
+		this.janelaPrincipal = janelaPrincipal;
 		pacienteDAO = new PacienteDAO();
 		medicamentoDAO = new MedicamentoDAO();
 		prescricaoMedicamentoDAO = new PrescricaoMedicamentoDAO();

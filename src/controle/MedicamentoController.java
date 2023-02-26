@@ -20,10 +20,10 @@ public class MedicamentoController implements ActionListener{
 	{
 		this.janelaPrincipal=janelaPrincipal;
 		medicamentoDAO = new MedicamentoDAO();
-		this.janelaPrincipal.getMedicamentos().getBtnSalvar().addActionListener(this);
-		this.janelaPrincipal.getMedicamentos().getBtnCancelar().addActionListener(this);
-		this.janelaPrincipal.getMedicamentos().getBtnAtualizar().addActionListener(this);
-		this.janelaPrincipal.getMedicamentos().getBtnRemover().addActionListener(this);	
+		janelaPrincipal.getMedicamentos().getBtnSalvar().addActionListener(this);
+		janelaPrincipal.getMedicamentos().getBtnCancelar().addActionListener(this);
+		janelaPrincipal.getMedicamentos().getBtnAtualizar().addActionListener(this);
+		janelaPrincipal.getMedicamentos().getBtnRemover().addActionListener(this);	
 	}
 	
 	public void cadastraMedicamento()
@@ -36,10 +36,9 @@ public class MedicamentoController implements ActionListener{
 		checkboxes.add(this.janelaPrincipal.getMedicamentos().getCheckboxPenicilina());
 		checkboxes.add(this.janelaPrincipal.getMedicamentos().getCheckboxGluten());
 		checkboxes.add(this.janelaPrincipal.getMedicamentos().getCheckboxDipirona());
-		
-		
-		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
-		String nome = this.janelaPrincipal.getMedicamentos().getFieldNome().getText();
+				
+		String codigoBarra = janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
+		String nome = janelaPrincipal.getMedicamentos().getFieldNome().getText();
 
 		for(JCheckBox checkbox : checkboxes) {
 			if (checkbox.isSelected()) {
@@ -57,16 +56,18 @@ public class MedicamentoController implements ActionListener{
 	
 	public void atualizaMedicamento()
 	{
-		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
-		String nome = this.janelaPrincipal.getMedicamentos().getFieldNome().getText();
-		String alergia = this.janelaPrincipal.getMedicamentos().getButtonGroup().getSelection().getActionCommand();
-		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergia);
+		List<String> alergias = new ArrayList<>();
+		
+		String codigoBarra = janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
+		String nome = janelaPrincipal.getMedicamentos().getFieldNome().getText();
+		String alergia = janelaPrincipal.getMedicamentos().getButtonGroup().getSelection().getActionCommand();
+		Medicamento medicamento = new Medicamento(codigoBarra,nome,alergias);
 		medicamentoDAO.atualizaMedicamento(medicamento);		
 	}
 	
 	public void removeMedicamento()
 	{
-		String codigoBarra = this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
+		String codigoBarra = janelaPrincipal.getMedicamentos().getFieldCodigodebarra().getText();
 		Medicamento medicamento = new Medicamento(codigoBarra,null,null);
 		medicamentoDAO.removeMedicamento(medicamento);
 	}
@@ -82,7 +83,7 @@ public class MedicamentoController implements ActionListener{
 		if (e.getActionCommand().equals("Cancelar"))
 		{
 			limpaTela();
-			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
+			janelaPrincipal.getCard().show(janelaPrincipal.getContentPane(), "panel");
 		}
 		
 		if(e.getActionCommand().equals("Atualizar"))
@@ -99,9 +100,9 @@ public class MedicamentoController implements ActionListener{
 	
 	public void limpaTela()
 	{
-		this.janelaPrincipal.getMedicamentos().getFieldCodigodebarra().setText("");
-		this.janelaPrincipal.getMedicamentos().getFieldNome().setText("");
-		this.janelaPrincipal.getMedicamentos().getButtonGroup().clearSelection();
+		janelaPrincipal.getMedicamentos().getFieldCodigodebarra().setText("");
+		janelaPrincipal.getMedicamentos().getFieldNome().setText("");
+		janelaPrincipal.getMedicamentos().getButtonGroup().clearSelection();
 	}
 	
 }

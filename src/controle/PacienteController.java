@@ -26,9 +26,9 @@ public class PacienteController implements ActionListener {
 	
 		this.janelaPrincipal=janelaPrincipal;
 		pacienteDAO = new PacienteDAO();
-		this.janelaPrincipal.getPanelAdmissaoPaciente().getBtnSalvar().addActionListener(this);
-		this.janelaPrincipal.getPanelAdmissaoPaciente().getBtnCancelar().addActionListener(this);
-		this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().addActionListener(this);	
+		janelaPrincipal.getPanelAdmissaoPaciente().getBtnSalvar().addActionListener(this);
+		janelaPrincipal.getPanelAdmissaoPaciente().getBtnCancelar().addActionListener(this);
+		janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().addActionListener(this);	
 		
 	}
 	
@@ -38,16 +38,16 @@ public class PacienteController implements ActionListener {
 		List<String> alergias = new ArrayList<>();
 		List<JCheckBox> checkboxes = new ArrayList<>();
 		
-		checkboxes.add(this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxFrutosdoMar());
-		checkboxes.add(this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxPenicilina());
-		checkboxes.add(this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxGluten());
-		checkboxes.add(this.janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxDipirona());
+		checkboxes.add(janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxFrutosdoMar());
+		checkboxes.add(janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxPenicilina());
+		checkboxes.add(janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxGluten());
+		checkboxes.add(janelaPrincipal.getPanelAdmissaoPaciente().getCheckboxDipirona());
 		
 		try {	
 			
-			String cpf = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText();
-			String nome = this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
-			Date dataNascimento = sdf.parse(this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
+			String cpf = janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().getText();
+			String nome = janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().getText();
+			Date dataNascimento = sdf.parse(janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().getText());
 			
 			for(JCheckBox checkbox : checkboxes) {
 				if (checkbox.isSelected()) {
@@ -55,7 +55,7 @@ public class PacienteController implements ActionListener {
 				}
 			}	
 						
-			String unidade = this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedItem().toString();
+			String unidade = janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().getSelectedItem().toString();
 			
 		
 			Paciente paciente = new Paciente(cpf,nome,dataNascimento,alergias,unidade);
@@ -77,12 +77,12 @@ public class PacienteController implements ActionListener {
 		
 		if(e.getActionCommand().equals("Cancelar"))
 		{
-			this.janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().setText("");
-			this.janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().setText("");
-			this.janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().setText("");
-			this.janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().setSelectedIndex(0);
-			this.janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().clearSelection();	
-			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
+			janelaPrincipal.getPanelAdmissaoPaciente().getTfNome().setText("");
+			janelaPrincipal.getPanelAdmissaoPaciente().getTfCPF().setText("");
+			janelaPrincipal.getPanelAdmissaoPaciente().getTfDataNasc().setText("");
+			janelaPrincipal.getPanelAdmissaoPaciente().getComboBox().setSelectedIndex(0);
+			janelaPrincipal.getPanelAdmissaoPaciente().getButtonGroup().clearSelection();	
+			janelaPrincipal.getCard().show(janelaPrincipal.getContentPane(), "panel");
 
 		}
 		
