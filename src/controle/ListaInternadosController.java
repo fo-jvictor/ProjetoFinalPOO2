@@ -37,7 +37,10 @@ public class ListaInternadosController implements ActionListener {
 		for (Paciente pac : pacientes) {
 			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosNome().append(pac.getNome() + "\n");
 			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosUnidade().append(pac.getUnidade()+"\n");
-			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosDataNasc().append(pac.getDataNascimento().toString()+"\n");			
+			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosDataNasc().append(pac.getDataNascimento().toString()+"\n");
+			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().append("Alergias do "+pac.getNome()+":");
+			pac.getAlergias().forEach(alergia -> janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().append(alergia+", "));
+			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().append("\n");
 		}
 	}
 
