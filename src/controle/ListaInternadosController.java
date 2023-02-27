@@ -35,10 +35,11 @@ public class ListaInternadosController implements ActionListener {
 
 		
 		for (Paciente pac : pacientes) {
+			System.out.println(pac.getCpf());
 			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosNome().append(pac.getNome() + "\n");
 			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosUnidade().append(pac.getUnidade()+"\n");
 			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosDataNasc().append(pac.getDataNascimento().toString()+"\n");
-			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().append("Alergias do "+pac.getNome()+":");
+			
 			pac.getAlergias().forEach(alergia -> janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().append(alergia+", "));
 			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().append("\n");
 		}
@@ -54,10 +55,6 @@ public class ListaInternadosController implements ActionListener {
 		
 		if (e.getActionCommand().equals("Cancelar"))
 		{
-			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosNome().setText("");
-			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosDataNasc().setText("");
-			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosUnidade().setText("");
-			this.janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().setText("");
 			this.janelaPrincipal.getCard().show(this.janelaPrincipal.getContentPane(), "panel");
 		}
 		
