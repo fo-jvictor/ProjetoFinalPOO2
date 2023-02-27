@@ -98,6 +98,10 @@ public class MedicamentoDAO {
 		return null;
 		
 	}
+	
+	public List<Medicamento> consultaMedicamentos() {
+		return List.of();
+	}
 
 	public boolean atualizaMedicamento(Medicamento medicamento) {
 		ClasseConexaoMySQL.abrirConexaoMySQL();

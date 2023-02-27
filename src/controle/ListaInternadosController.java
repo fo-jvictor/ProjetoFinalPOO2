@@ -2,8 +2,11 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.text.Caret;
 
 import dao.PacienteDAO;
 import model.Paciente;
@@ -19,14 +22,23 @@ public class ListaInternadosController implements ActionListener {
 	{
 		this.janelaPrincipal=janelaPrincipal;
 		pacienteDAO = new PacienteDAO();
-		//implementar os listeners
 		this.janelaPrincipal.getListainternados().getButtonListaDeInternadosSalvar().addActionListener(this);
 		this.janelaPrincipal.getListainternados().getButtonListaDeInternadosCancelar().addActionListener(this);
+		mostraPacientes();
 	}
 	
 	public void mostraPacientes()
 	{
+		var pacientes = pacienteDAO.consultaTodosPacientes();
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+		
+		for (Paciente pac : pacientes) {
+			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosNome().append(pac.getNome() + "\n");
+			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosUnidade().append(pac.getUnidade()+"\n");
+			janelaPrincipal.getListainternados().getTextAreaListaDeInternadosDataNasc().append(pac.getDataNascimento().toString()+"\n");			
+		}
 	}
 
 	
@@ -35,7 +47,6 @@ public class ListaInternadosController implements ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals("Salvar"))
 		{
-			mostraPacientes();
 		}
 		
 		if (e.getActionCommand().equals("Cancelar"))

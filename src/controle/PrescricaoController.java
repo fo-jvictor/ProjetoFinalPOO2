@@ -99,12 +99,13 @@ public class PrescricaoController implements ActionListener, KeyListener {
 		var medicamento = medicamentoDAO.consultaMedicamento(codigoBarra);
 		var paciente = pacienteDAO.consultaPaciente(cpf);
 
-		var alergiasMedicamento = medicamento.getAlergias().stream().collect(Collectors.toList());
+		var alergiasMedicamento = medicamento.getAlergias();
 
-		var alergiasPaciente = paciente.getAlergias().stream().collect(Collectors.toList());
+		var alergiasPaciente = paciente.getAlergias();
 
-		boolean hasCommonElement = alergiasMedicamento.stream().filter(alergiasPaciente::contains).findAny()
-				.isPresent();
+		boolean hasCommonElement = 
+				alergiasMedicamento.stream()
+				.filter(alergiasPaciente::contains).findAny().isPresent();
 
 		if (!hasCommonElement) {
 			PrescricaoMedicamento prescricaoMedicamento = new PrescricaoMedicamento(cpf, codigoBarra);

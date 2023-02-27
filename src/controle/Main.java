@@ -1,21 +1,20 @@
 package controle;
 
-import model.PrescricaoMedicamento;
 import visao.JanelaPrincipal;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
+		var janelaPrincipal = new JanelaPrincipal();
 		janelaPrincipal.setVisible(true);		
 		
-		PacienteController pacienteController = new PacienteController(janelaPrincipal);
-		MedicamentoController medicamentoController = new MedicamentoController(janelaPrincipal);
-		AltaController altaController = new AltaController(janelaPrincipal);
-		PrescricaoController prescricaoController = new PrescricaoController(janelaPrincipal);
-		ListaInternadosController listaInternadosController = new ListaInternadosController(janelaPrincipal);
-		UsuarioController usuarioController = new UsuarioController(janelaPrincipal);
+		var pacienteController = new PacienteController(janelaPrincipal);
+		var medicamentoController = new MedicamentoController(janelaPrincipal);
+		var altaController = new AltaController(janelaPrincipal);
+		var prescricaoController = new PrescricaoController(janelaPrincipal);
+		var listaInternadosController = new ListaInternadosController(janelaPrincipal);
+		var usuarioController = new UsuarioController(janelaPrincipal);
 		
 	}
 	

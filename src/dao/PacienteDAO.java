@@ -108,12 +108,7 @@ public class PacienteDAO {
 			prepS = con.prepareStatement(sql);
 			prepS.setString(1, cpf);
 			ResultSet resultSet = prepS.executeQuery();
-			// NA HORA DE PRESCREVER UM MEDICAMENTO NA TELA DE PRESCRIÇÃO
-			// O RESULTSET.NEXT() É FALSE E NÃO SETTA AS INFOS PRA JOGAR NA TELA DE VOLTA
-			// RESULTANDO NUMA EXCEÇÃO PQ A DATA DE NASCIMENTO FICA NULL
-			
-			//solucao : verificar se o metodo pra cadastrar um paciente vem com data
-			//caso nao venha, setar a data de nascimento com sysdate
+
 			while (resultSet.next()) {
 
 				String nome = resultSet.getString(2);
@@ -141,9 +136,10 @@ public class PacienteDAO {
 
 	}
 
-	public boolean consultaTodosPacientes() throws ClassNotFoundException, IOException {
+	public List<Paciente> consultaTodosPacientes() {
 		ClasseConexaoMySQL.abrirConexaoMySQL();
 		con = ClasseConexaoMySQL.getCon();
+		List<Paciente> pacientes = new ArrayList<>();
 
 		if (con != null) {
 			String sql = "select * from Paciente";
@@ -163,17 +159,22 @@ public class PacienteDAO {
 					List<String> alergias = deserialize(bytes);
 
 					String unidade = resultSet.getString(5);
-					Paciente paciente = new Paciente(cpf, nome, datanascimento, alergias, unidade);
+					pacientes.add(new Paciente(cpf, nome, datanascimento, alergias, unidade));
 				}
+				
+				return pacientes;
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 
 		}
-
-		return false;
+		return List.of();
 
 	}
 
