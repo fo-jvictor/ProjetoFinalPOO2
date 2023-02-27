@@ -151,7 +151,7 @@ public class PacienteDAO {
 
 				while (resultSet.next()) {
 
-					String cpf = null;
+					String cpf = resultSet.getString(1);
 					String nome = resultSet.getString(2);
 					Date datanascimento = resultSet.getDate(3);
 

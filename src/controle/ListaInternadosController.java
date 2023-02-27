@@ -45,12 +45,20 @@ public class ListaInternadosController implements ActionListener {
 		}
 	}
 
+	public void limpaTela() {
+		janelaPrincipal.getListainternados().getTextAreaListaDeInternadosUnidade().setText("");
+		janelaPrincipal.getListainternados().getTextAreaListaDeInternadosAlergias().setText("");
+		janelaPrincipal.getListainternados().getTextAreaListaDeInternadosDataNasc().setText("");
+		janelaPrincipal.getListainternados().getTextAreaListaDeInternadosNome().setText("");
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals("Salvar"))
 		{
+			limpaTela();
+			mostraPacientes();
 		}
 		
 		if (e.getActionCommand().equals("Cancelar"))
